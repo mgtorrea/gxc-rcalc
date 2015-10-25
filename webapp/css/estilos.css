@@ -1,0 +1,21 @@
+/*gxc-header*/
+
+.gxc-header{
+   background-color: #3E8059;
+   color: white;
+}
+
+.gxc-header *{
+		color: white;
+}
+
+.gxc-menu, .gxc-menu ion-item{
+		background-color: #2B593E;
+		color:white;
+}
+
+.gxc-menu-header{
+   height:40px;
+   width:100%;
+   display:block;
+}
