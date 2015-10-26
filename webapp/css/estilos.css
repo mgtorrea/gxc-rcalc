@@ -1,21 +1,39 @@
 /*gxc-header*/
 
-.gxc-header{
-   background-color: #3E8059;
-   color: white;
+.gxc-header {
+    background-color: #3E8059;
+    color: white;
+    border: 0;
+}
+.gxc-header * {
+    color: white;
+}
+.gxc-menu,
+.gxc-menu ion-item {
+    background-color: #2B593E;
+    color: white;
+}
+.gxc-menu-header {
+    height: 80px;
+    width: 100%;
+    display: block;
 }
 
-.gxc-header *{
-		color: white;
+#calc_principal{
+    margin-top: 43px;
 }
 
-.gxc-menu, .gxc-menu ion-item{
-		background-color: #2B593E;
-		color:white;
+.gxc-calc-header .row{
+    background-color: #253f21;
+    color:white;
+    font-size:9pt;
+    padding-top: 0;
+    padding-bottom: 0;
 }
-
-.gxc-menu-header{
-   height:40px;
-   width:100%;
-   display:block;
+.calc-res-costo{
+    text-align: right;
+    font-size: 18pt;
+}
+.calc-nombre-empresa{
+    font-size: 15pt;
 }

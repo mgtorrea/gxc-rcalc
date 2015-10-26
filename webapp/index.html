@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8"> 
+    <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=no, width=device-width" />
-	<link rel="stylesheet" type="text/css" href="css/ionic.min.css">
-	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="css/ionic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <script type="text/javascript" src="js/ionic.bundle.min.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
 </head>
 
 <body ng-app="test">
@@ -20,17 +21,43 @@
                 <h1 class="title">Calculadora de riesgos</h1>
             </ion-header-bar>
             <ion-pane>
-            
-			         </ion-pane>
-      </ion-side-menu-content>
-      <ion-side-menu side="left" class="gxc-menu" style="overflow-y: auto;">
-      		 <div class="gxc-menu-header"></div>
-      			<ion-list>
-      					<ion-item>Cu&aacute;nto cuesta mi informaci&oacute;n?</ion-item>
-      					<ion-item>Ranking de empresas</ion-item>
-      					<ion-item>Test de confianza</ion-item>
-   			   </ion-list>
-      </ion-side-menu>
-   </ion-side-menus>
+                <div id="calc_principal">
+                    <div class="gxc-calc-header">
+                        <div class="row" style="padding-top: 0;padding-bottom: 0;">
+                            <div class="col">Empresa</div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col calc-nombre-empresa">La grupera</div>
+                            <div class="col calc-res-costo">$1,243.18</div>
+                        </div>
+                        <div class="row" style="padding-top: 0;padding-bottom: 0;">
+                            <div class="col"></div>
+                            <div class="col" style="text-align:right;">Costo</div>
+                        </div>
+                    </div>
+                    <ion-list>
+                        <ion-item class="item-icon-left item-icon-right item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                            </label>
+                            Nombre<span class="badge badge-assertive">&nbsp;</span>
+                        </ion-item>
+                    </ion-list>
+                </div>
+            </ion-pane>
+        </ion-side-menu-content>
+        <ion-side-menu side="left" class="gxc-menu" style="overflow-y: auto;">
+            <div class="gxc-menu-header">
+                Calculadora de riesgos
+                <br/>v0.1
+            </div>
+            <ion-list>
+                <ion-item class="item-icon-left"><i class="icon ion-help-circled"></i>Ayuda</ion-item>
+                <ion-item class="item-icon-left"><i class="icon ion-information-circled"></i>Sobre la aplicaci&oacute;n</ion-item>
+            </ion-list>
+        </ion-side-menu>
+    </ion-side-menus>
 </body>
+
 </html>
