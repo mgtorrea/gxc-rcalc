@@ -13,5 +13,22 @@ The project is divided into smaller specific-purpose submodules:
 *	webapp: front-end components to generate a cool visualization (css,js,html)
 
 
-Building
+rest
 =====
+
+building
+======
+
+Build rest module using maven:
+````
+cd rest/
+mvn clean package
+````
+
+running
+======
+
+Run the embedded rest service after building it by executing:
+````
+java -jar target/rest-0.1-SNAPSHOT.jar
+````
