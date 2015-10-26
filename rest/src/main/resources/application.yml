@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+endpoints:
+  enabled: false
+  health:
+    enabled: true
+    sensitive: false
+
+
+index:
+  resource: classpath:index-dummy.csv
+  delimiter: ','
