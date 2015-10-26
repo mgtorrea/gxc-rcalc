@@ -21,8 +21,8 @@ building
 
 Build rest module using maven:
 ````
-cd rest/
-mvn clean package
+$ cd rest/
+$ mvn clean package
 ````
 
 running
@@ -30,5 +30,7 @@ running
 
 Run the embedded rest service after building it by executing:
 ````
-java -jar target/rest-0.1-SNAPSHOT.jar
+$ java -jar target/rest-0.1-SNAPSHOT.jar
 ````
+
+Then try the endpoint using **curl** or your browser on the addres: [localhost:8080/index](http://localhost:8080/index)
