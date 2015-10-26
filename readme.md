@@ -9,14 +9,10 @@ Modules
 
 The project is divided into smaller specific-purpose submodules:
 
-*	rest: spring-boot-web application to expose the keywords consumption through a RESTful service
+*	rest: spring-boot RESTful endpoints to expose risk index values.
 *	webapp: front-end components to generate a cool visualization (css,js,html)
 
-
-rest
-=====
-
-building
+rest (building)
 ======
 
 Build rest module using maven:
@@ -25,7 +21,7 @@ $ cd rest/
 $ mvn clean package
 ````
 
-running
+rest (running)
 ======
 
 Run the embedded rest service after building it by executing:
