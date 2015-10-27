@@ -29,7 +29,7 @@
                         </div>
                         <div class="row">
                             <div class="col calc-nombre-empresa">La grupera</div>
-                            <div class="col calc-res-costo">$1,243.18</div>
+                            <div class="col calc-res-costo">${{resultado| number:2}}</div>
                         </div>
                         <div class="row" style="padding-top: 0;padding-bottom: 0;">
                             <div class="col"></div>
@@ -37,11 +37,19 @@
                         </div>
                     </div>
                     <ion-list>
+                       <ion-item class="item-divider">Informaci&oacute;n seleccionada</ion-item>
+                       <ion-item class="item-icon-left item-icon-right item-checkbox" ng-repeat="item in items_seleccionados">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="item.checked" ng-checked="item.checked" ng-click="clickItem(item);">
+                            </label>
+                                {{item.name}}<span class="badge badge-{{item.cat}}">&nbsp;</span>
+                        </ion-item>
+                       <ion-item class="item-divider">Otra informaci&oacute;n</ion-item>
                         <ion-item class="item-icon-left item-icon-right item-checkbox" ng-repeat="item in items">
                             <label class="checkbox">
-                                <input type="checkbox">
+                                <input type="checkbox" ng-model="item.checked" ng-checked="item.checked" ng-click="clickItem(item);">
                             </label>
-                                {{item.name}}<span class="badge badge-assertive">&nbsp;</span>
+                                {{item.name}}<span class="badge badge-{{item.cat}}">&nbsp;</span>
                         </ion-item>
                     </ion-list>
                 </div>

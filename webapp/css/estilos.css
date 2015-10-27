@@ -37,3 +37,19 @@
 .calc-nombre-empresa{
     font-size: 15pt;
 }
+
+.badge-std{
+    background-color: #458824;
+}
+
+.badge-stv{
+    background-color: #cfb334;
+}
+
+.badge-spc{
+    background-color: #cf3434;
+}
+
+.item-checkbox::first-letter {
+    text-transform: uppercase;
+}
