@@ -5,7 +5,7 @@
     color: white;
     border: 0;
 }
-.gxc-header * {
+.gxc-header * , .gx-header .button, .button:hover{
     color: white;
 }
 .gxc-menu,
