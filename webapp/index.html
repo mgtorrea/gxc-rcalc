@@ -13,6 +13,7 @@
 </head>
 
 <body ng-app="gxc-rcalc">
+   <div id="gxc-loader"></div>
     <ion-side-menus>
         <!-- Center content -->
         <ion-side-menu-content drag-content="false">
@@ -64,7 +65,7 @@
         <ion-side-menu side="left" class="gxc-menu" style="overflow-y: auto;" ng-controller="MenuController">
             <div class="gxc-menu-header">
                 <img src="img/icon-monochrome.png" />
-                <br/> Calculadora de riesgo
+                <br/> Calculadora de riesgo<br/><span style="font-style: italic;">&quot;&iquest;Cu&aacute;nto vale tu informaci&oacute;n?&quot;</span>
             </div>
             <ion-list>
                 <ion-item class="item-icon-left" ng-click="muestraAyuda();"><i class="icon ion-help-circled"></i>Ayuda</ion-item>
@@ -99,10 +100,10 @@
             <br/>Mario A. Garc&iacute;a Torrea
             <br/>
             <br/> Para el desarrollo de la aplicaci&oacute;n se utilizaron las siguientes librer&iacute;as y recursos:
-            <ion-list class="list-inset">
-                <ion-item>ionic Framework http://ionicframework.com/</ion-item>
-                <ion-item>odometer  https://github.com/HubSpot/odometer</ion-item>
-            </ion-list>
+            <div class="list list-inset">
+                <ion-item>ionic Framework<br/>http://ionicframework.com/</ion-item>
+                <ion-item>odometer<br/>https://github.com/HubSpot/odometer</ion-item>
+            </div>
 
         </ion-content>
     </ion-modal-view>

@@ -41,6 +41,10 @@ cat_proc = cat_proc.sort(function (a, b) {
     return a.name.localeCompare(b.name)
 });
 
+setTimeout(function(){
+    document.querySelector('#gxc-loader').style.display='none';
+},1000);
+
 
 app.controller('RiskCalculatorController', function ($scope) {
 
