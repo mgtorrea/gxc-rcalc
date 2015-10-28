@@ -41,7 +41,16 @@ cat_proc = cat_proc.sort(function (a, b) {
     return a.name.localeCompare(b.name)
 });
 
+
+
 app.controller('RiskCalculatorController', function ($scope) {
+    
+    var od = new Odometer({
+        el: document.querySelector('.calc-res-costo .content'),
+        value: 0,
+        format:'(,ddd).dd',
+        duration: 500
+    });
 
     $scope.items = cat_proc;
     $scope.resultado = 0;
@@ -63,6 +72,7 @@ app.controller('RiskCalculatorController', function ($scope) {
             return a.name.localeCompare(b.name)
         });
         $scope.resultado = $scope.recalcula();
+        od.update($scope.resultado);
     }
 
     $scope.recalcula = function () {

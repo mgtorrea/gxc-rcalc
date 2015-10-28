@@ -19,6 +19,15 @@
     display: block;
 }
 
+.gxc-calc-header{
+    margin-top: 44px;
+}
+
+.hxc-list-calc{
+    top:129px;
+    background-color: #253f21;
+}
+
 .gxc-calc-header .row{
     background-color: #253f21;
     color:white;
