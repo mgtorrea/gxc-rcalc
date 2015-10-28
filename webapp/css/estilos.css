@@ -69,3 +69,6 @@
 .item-checkbox::first-letter {
     text-transform: uppercase;
 }
+.popup-container .popup{
+    width: 40%;
+}

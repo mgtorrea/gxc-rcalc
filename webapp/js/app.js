@@ -13,6 +13,8 @@ var categorias = {
     especial: ['fecha vencimiento de tarjeta', 'datos de banda magnética', 'PIN de tarjeta']
 };
 
+var mensajes=["Esa promoción en la que ganaste algo 'gratis' no necesariamente fue tan gratuita después de todo. ¿Revisaste el aviso de privacidad? ¿Sabes cuánto puede valer tu información?","¿Te pidieron tu dirección y teléfono para recibir promociones? ¿Sabes cuánto puede valer tu información?","¿Para participar en una promoción te piden tu correo electrónico? ¿Sabes cuánto puede valer tu información?","Tu información es muy valiosa en el mercado negro. También ten precauciones sobre lo que compartes.","No sólo te preocupes de los 'acechadores' o 'chismosos' en tus redes sociales. Hay para quienes es más valiosa tu información.","Qué curioso que los anuncios que te aparecen en internet se relacionen con tus hábitos de navegación, ¿no crees?","¿Te clonaron tu tarjeta? Una simple fotografía de ella puede dar más información de lo que crees.","La suplantación de identidad está más cerca de lo que crees, sólo se requiere un descuido."];
+
 var cat_proc = [];
 
 for (var i = 0; i < categorias.estandar.length; i++) {
@@ -46,7 +48,12 @@ setTimeout(function(){
 },1000);
 
 
-app.controller('RiskCalculatorController', function ($scope) {
+app.controller('RiskCalculatorController', function ($scope,$ionicPopup) {
+    
+    var alertPopup = $ionicPopup.alert({
+     title: 'Aviso',
+     template: mensajes[Math.floor(Math.random()*mensajes.length)]
+   }).then(function(){})
 
     var od = new Odometer({
         el: document.querySelector('.calc-res-costo .content'),
