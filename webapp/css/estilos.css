@@ -5,7 +5,9 @@
     color: white;
     border: 0;
 }
-.gxc-header * , .gx-header .button, .button:hover{
+.gxc-header *,
+.gx-header .button,
+.button:hover {
     color: white;
 }
 .gxc-menu,
@@ -14,47 +16,47 @@
     color: white;
 }
 .gxc-menu-header {
-    height: 80px;
+    height: 120px;
     width: 100%;
     display: block;
+    text-align: center;
 }
-
-.gxc-calc-header{
+.gxc-menu-header img {
+    width: 30%;
+    margin: auto;
+    display: block;
+    margin-top: 20px;
+}
+.gxc-calc-header {
     margin-top: 44px;
 }
-
-.hxc-list-calc{
-    top:129px;
+.hxc-list-calc {
+    top: 129px;
     background-color: #253f21;
 }
-
-.gxc-calc-header .row{
+.gxc-calc-header .row {
     background-color: #253f21;
-    color:white;
-    font-size:9pt;
+    color: white;
+    font-size: 9pt;
     padding-top: 0;
     padding-bottom: 0;
 }
-.calc-res-costo{
+.calc-res-costo {
     text-align: right;
     font-size: 18pt;
 }
-.calc-nombre-empresa{
+.calc-nombre-empresa {
     font-size: 15pt;
 }
-
-.badge-std{
+.badge-std {
     background-color: #458824;
 }
-
-.badge-stv{
+.badge-stv {
     background-color: #cfb334;
 }
-
-.badge-spc{
+.badge-spc {
     background-color: #cf3434;
 }
-
 .item-checkbox::first-letter {
     text-transform: uppercase;
 }

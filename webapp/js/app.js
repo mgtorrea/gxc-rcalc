@@ -42,13 +42,12 @@ cat_proc = cat_proc.sort(function (a, b) {
 });
 
 
-
 app.controller('RiskCalculatorController', function ($scope) {
-    
+
     var od = new Odometer({
         el: document.querySelector('.calc-res-costo .content'),
         value: 0,
-        format:'(,ddd).dd',
+        format: '(,ddd).dd',
         duration: 500
     });
 
@@ -121,7 +120,7 @@ app.controller('MenuController', function ($scope, $ionicModal) {
             $scope.modal.hide();
         };
     }
-    
+
     $scope.muestraAcercaDe = function () {
         $ionicModal.fromTemplateUrl('modal-about.html', {
             scope: $scope,
