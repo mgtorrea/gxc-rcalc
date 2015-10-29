@@ -3,10 +3,9 @@ package gxc.rcalc.rest.repository;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -27,7 +26,7 @@ public class CSVRiskIndexRepository implements RiskIndexRepository, Initializing
 	@Value("${index.resource}")
 	private Resource resource;
 	
-	private List <RiskIndex> cache;
+	private List<RiskIndex> cache;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -40,25 +39,13 @@ public class CSVRiskIndexRepository implements RiskIndexRepository, Initializing
          while ((line = br.readLine()) != null) {
         	String[] parts = StringUtils.tokenizeToStringArray(line, ",");
  			
- 			RiskIndex ri = new RiskIndex();
- 			ri.setId(Long.valueOf(parts[0]));
- 			ri.setCompanyName(parts[1]);
- 			ri.setCompanyURL(extractURL(parts[2]));
- 			ri.setRisk(Integer.valueOf(parts[3]));
+        	Company compan = new Company(parts[1],parts[2]);
+ 			RiskIndex ri = new RiskIndex(Long.valueOf(parts[0]),Integer.valueOf(parts[3]), new Date(), compan);
+ 	
  			
  			cache.add(ri);
       	  } 
          br.close();
-	}
-	
-	private URL extractURL(String url) throws MalformedURLException {
-		if(StringUtils.isEmpty(url)) {
-			return null;
-		}
-		
-		final String fixed = (url.startsWith("http")) ? url : "http://" + url;
-		
-		return new URL(fixed);
 	}
 
 	@Override
@@ -81,8 +68,9 @@ public class CSVRiskIndexRepository implements RiskIndexRepository, Initializing
 	public Collection<RiskIndex> findByCompanyName(String companyName) {
 		List<RiskIndex> risks = new ArrayList<RiskIndex>();
 		for(RiskIndex ri : cache) {
-			if(ri.getCompanyName().startsWith(companyName) 
-				|| ri.getCompanyName().contains(companyName)) {
+			String name = ri.getCompany().getName();
+			if(name.startsWith(companyName) 
+				|| name.contains(companyName)) {
 				
 				risks.add(ri);
 			}

@@ -57,7 +57,7 @@ public class Controller {
 	private static RiskIndexDto dto(RiskIndex ri) {
 		RiskIndexDto dto = new RiskIndexDto();
 		dto.setId(ri.getId());
-		dto.setName(((ri.getCompanyName() != null) ? ri.getCompanyName() : ri.getCompanyURL().toString())); // FIXME: nullpointerexception if both null
+		dto.setName(coalesce(ri.getCompany().getName(), ri.getCompany().getUrl()));
 		dto.setRiskIndex(ri.getRisk());
 		
 		return dto;
@@ -70,6 +70,16 @@ public class Controller {
 		}
 		
 		return list;
+	}
+	
+	private static String coalesce(String... str) {
+		for(String s : str ) {
+			if(s != null) {
+				return s;
+			}
+		}
+		
+		return null;
 	}
 
 }
