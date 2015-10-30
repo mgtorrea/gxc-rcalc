@@ -1,5 +1,8 @@
 package gxc.rcalc.rest.repository;
 
+import gxc.rcalc.rest.entity.Company;
+import gxc.rcalc.rest.entity.RiskIndex;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,7 +23,7 @@ import org.springframework.util.StringUtils;
  * @author fcisneros
  * 
  */
-@Component
+//@Component
 public class CSVRiskIndexRepository implements RiskIndexRepository, InitializingBean {
 	
 	@Value("${index.resource}")
@@ -54,7 +57,7 @@ public class CSVRiskIndexRepository implements RiskIndexRepository, Initializing
 	}
 
 	@Override
-	public RiskIndex findById(Integer id) {
+	public RiskIndex findById(Long id) {
 		for(RiskIndex ri : cache) {
 			if(ri.getId().equals(id)) {
 				return ri;

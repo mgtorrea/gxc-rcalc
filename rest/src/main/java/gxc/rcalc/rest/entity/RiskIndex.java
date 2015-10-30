@@ -1,4 +1,4 @@
-package gxc.rcalc.rest.repository;
+package gxc.rcalc.rest.entity;
 
 import java.io.Serializable;
 import java.util.Date;

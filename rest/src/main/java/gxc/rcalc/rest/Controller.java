@@ -1,6 +1,6 @@
 package gxc.rcalc.rest;
 
-import gxc.rcalc.rest.repository.RiskIndex;
+import gxc.rcalc.rest.entity.RiskIndex;
 import gxc.rcalc.rest.repository.RiskIndexRepository;
 
 import java.util.ArrayList;
