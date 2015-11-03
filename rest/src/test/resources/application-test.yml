@@ -1,0 +1,20 @@
+spring:
+  profiles: test
+
+#Database Configuration
+db:
+  driver: org.hsqldb.jdbc.JDBCDriver
+  url: jdbc:hsqldb:mem:.
+  username: sa
+  password: 
+
+#Hibernate Configuration
+hibernate:
+  dialect: org.hibernate.dialect.HSQLDialect
+  hbm2ddl:
+    auto: create
+    import_files:
+  ejb:
+    naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
+  show_sql: false
+  format_sql: true
