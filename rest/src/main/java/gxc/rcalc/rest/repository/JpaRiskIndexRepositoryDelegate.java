@@ -14,12 +14,9 @@ public interface JpaRiskIndexRepositoryDelegate extends CrudRepository<RiskIndex
 	@Transactional(readOnly = true)
 	RiskIndex findById(Long id);
 	
-	// FIXME: add selection for latest only of each company
-	//@Query("select r from RiskIndex r where r.company like CONCAT(?1, '%')")
 	@Transactional(readOnly = true)
 	List<RiskIndex> findLatestByCompanyNameStartingWith(String name);
 	
-	// FIXME: add selection for latest only of each company
 	@Transactional(readOnly = true)
 	List<RiskIndex> findAll();
 }

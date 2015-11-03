@@ -13,8 +13,9 @@ hibernate:
   dialect: org.hibernate.dialect.HSQLDialect
   hbm2ddl:
     auto: create
-    import_files:
+    import_files: import-test.sql
   ejb:
     naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
   show_sql: false
   format_sql: true
+

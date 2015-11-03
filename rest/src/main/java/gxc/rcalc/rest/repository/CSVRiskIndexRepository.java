@@ -43,7 +43,7 @@ public class CSVRiskIndexRepository implements RiskIndexRepository, Initializing
         	String[] parts = StringUtils.tokenizeToStringArray(line, ",");
  			
         	Company compan = new Company(parts[1],parts[2]);
- 			RiskIndex ri = new RiskIndex(Long.valueOf(parts[0]),Integer.valueOf(parts[3]), new Date(), compan);
+ 			RiskIndex ri = new RiskIndex(Long.valueOf(parts[0]),Float.valueOf(parts[3]), new Date(), compan);
  	
  			
  			cache.add(ri);

@@ -2,6 +2,7 @@ package gxc.rcalc.rest.repository.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import gxc.rcalc.rest.config.PersistenceConfig;
 import gxc.rcalc.rest.entity.RiskIndex;
 import gxc.rcalc.rest.repository.RiskIndexRepository;
@@ -35,7 +36,31 @@ public class JpaRiskIndexRepositoryTest {
 	public void findAllOk() {
 		Collection<RiskIndex> indexes = repository.findAll();
 		assertNotNull(indexes);
-		assertEquals(6,indexes.size());
+		assertEquals(4,indexes.size());
+		for(RiskIndex r : indexes) {
+			assertNotNull(r);
+			assertTrue(r.getRisk() > 1);
+		}
+	}
+	
+	@Test
+	public void findByCompanyNameOk() {
+		Collection<RiskIndex> indexes = repository.findByCompanyName("medi"); // should match 'medicare' company
+		assertNotNull(indexes);
+		assertEquals(1,indexes.size());
+		for(RiskIndex r : indexes) {
+			assertNotNull(r);
+			assertTrue(2.5F == r.getRisk());
+		}
+	}
+	
+	@Test
+	public void findByIdOk() {
+		RiskIndex r = repository.findById(2L);
+		assertNotNull(r);
+		assertTrue(1.3F == r.getRisk());
+		assertEquals("bombardier",r.getCompany().getName());
+		
 	}
 	
 	@Configuration

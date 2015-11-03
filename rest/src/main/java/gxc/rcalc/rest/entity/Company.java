@@ -27,6 +27,10 @@ public class Company implements Serializable {
 	
 	@Column(name = "description") 
 	private String description;
+	
+	public Company() {
+		
+	}
 
 	public Company(String name, String url) {
 		this.name = name;

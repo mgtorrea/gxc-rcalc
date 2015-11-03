@@ -9,7 +9,7 @@ public class RiskIndexDto {
 	private String name;
 	
 	/* Risk index value */
-	private Integer riskIndex;
+	private Float riskIndex;
 
 	public Long getId() {
 		return id;
@@ -27,11 +27,11 @@ public class RiskIndexDto {
 		this.name = name;
 	}
 
-	public Integer getRiskIndex() {
+	public Float getRiskIndex() {
 		return riskIndex;
 	}
 
-	public void setRiskIndex(Integer riskIndex) {
+	public void setRiskIndex(Float riskIndex) {
 		this.riskIndex = riskIndex;
 	}
 }

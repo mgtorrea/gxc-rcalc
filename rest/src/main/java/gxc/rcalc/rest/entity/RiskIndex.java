@@ -24,7 +24,7 @@ public class RiskIndex implements Serializable {
 	private Long id;
 	
 	@Column(name = "risk", nullable = false)
-	private Integer risk;
+	private Float risk;
 	
 	@Column(name = "created_at", nullable = false)
 	private Date createdAt;
@@ -33,14 +33,18 @@ public class RiskIndex implements Serializable {
 	@JoinColumn(name = "company_id")
 	private Company company;
 	
-	public RiskIndex(Long id, Integer risk, Date createdAt, Company company) {
+	public RiskIndex() {
+		
+	}
+	
+	public RiskIndex(Long id, Float risk, Date createdAt, Company company) {
 		this.id = id;
 		this.risk = risk;
 		this.createdAt = createdAt;
 		this.company = company;
 	}
 
-	public RiskIndex(Integer risk, Date createdAt, Company company) {
+	public RiskIndex(Float risk, Date createdAt, Company company) {
 		this(null,risk,createdAt,company);
 	}
 
@@ -52,11 +56,11 @@ public class RiskIndex implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getRisk() {
+	public Float getRisk() {
 		return risk;
 	}
 
-	public void setRisk(Integer risk) {
+	public void setRisk(Float risk) {
 		this.risk = risk;
 	}
 
@@ -67,4 +71,6 @@ public class RiskIndex implements Serializable {
 	public Company getCompany() {
 		return company;
 	}
+	
+	// TODO: correctly implements equals and hashcode
 }
