@@ -7,25 +7,20 @@ endpoints:
     enabled: true
     sensitive: false
 
-
-index:
-  resource: classpath:index-dummy.csv
-  delimiter: ','
-
-
 #Database Configuration
 db:
-  driver:
-  url:
-  username: 
+  driver: org.hsqldb.jdbc.JDBCDriver
+  url: jdbc:hsqldb:mem:.
+  username: sa
   password: 
 
 #Hibernate Configuration
 hibernate:
-  dialect: org.hibernate.dialect.PostgreSQLDialect
+  dialect: org.hibernate.dialect.HSQLDialect
   hbm2ddl:
     auto: create
-    import_files:
-  ejb.naming_strategy:
+    import_files: import.sql
+  ejb:
+    naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
   show_sql: false
   format_sql: true
