@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=no, width=device-width" />
+    <link rel="stylesheet" type="text/css" href="css/ionic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="css/odometer-theme-minimal.css" />
+    <script type="text/javascript" src="js/ionic.bundle.min.js"></script>
+    <script type="text/javascript" src="js/odometer.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+</head>
+
+<body ng-app="gxc-rcalc">
+   <div id="gxc-loader"></div>
+    <ion-side-menus>
+        <!-- Center content -->
+        <ion-side-menu-content drag-content="false">
+            <ion-header-bar class="gxc-header" align-title="left">
+                <div class="buttons">
+                    <button class="button button-icon ion-navicon" menu-toggle="left"> </button>
+                </div>
+                <h1 class="title"></h1>
+            </ion-header-bar>
+            <ion-pane>
+
+                <div id="calc_principal" ng-controller="RiskCalculatorController">
+                    <div class="gxc-calc-header">
+                        <div class="row" style="padding-top: 0;padding-bottom: 0;">
+                            <div class="col">Empresa</div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col calc-nombre-empresa">La grupera</div>
+                            <div class="col calc-res-costo">$<span class="content"></span></div>
+                        </div>
+                        <div class="row" style="padding-top: 0;padding-bottom: 0;">
+                            <div class="col"></div>
+                            <div class="col" style="text-align:right;">Costo</div>
+                        </div>
+                    </div>
+                    <ion-content class="hxc-list-calc">
+                        <ion-list>
+                            <ion-item class="item-divider">Informaci&oacute;n seleccionada</ion-item>
+                            <ion-item class="item-icon-left item-icon-right item-checkbox" ng-repeat="item in items_seleccionados">
+                                <label class="checkbox">
+                                    <input type="checkbox" ng-model="item.checked" ng-checked="item.checked" ng-click="clickItem(item);">
+                                </label>
+                                {{item.name}}<span class="badge badge-{{item.cat}}">&nbsp;</span>
+                            </ion-item>
+                            <ion-item class="item-divider">Otra informaci&oacute;n</ion-item>
+                            <ion-item class="item-icon-left item-icon-right item-checkbox" ng-repeat="item in items">
+                                <label class="checkbox">
+                                    <input type="checkbox" ng-model="item.checked" ng-checked="item.checked" ng-click="clickItem(item);">
+                                </label>
+                                {{item.name}}<span class="badge badge-{{item.cat}}">&nbsp;</span>
+                            </ion-item>
+                        </ion-list>
+                    </ion-content>
+                </div>
+
+            </ion-pane>
+        </ion-side-menu-content>
+        <ion-side-menu side="left" class="gxc-menu" style="overflow-y: auto;" ng-controller="MenuController">
+            <div class="gxc-menu-header">
+                <img src="img/icon-monochrome.png" />
+                <br/> Calculadora de riesgo<br/><span style="font-style: italic;">&quot;&iquest;Cu&aacute;nto vale tu informaci&oacute;n?&quot;</span>
+            </div>
+            <ion-list>
+                <ion-item class="item-icon-left" ng-click="muestraAyuda();"><i class="icon ion-help-circled"></i>Ayuda</ion-item>
+                <ion-item class="item-icon-left" ng-click="muestraAcercaDe();"><i class="icon ion-information-circled"></i>Sobre la aplicaci&oacute;n</ion-item>
+            </ion-list>
+        </ion-side-menu>
+    </ion-side-menus>
+</body>
+<script id="modal-help.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="gxc-header">
+            <h1 class="title">Ayuda</h1>
+            <button class="button button-clear icon ion-close-round" ng-click="closeModal();"></button>
+        </ion-header-bar>
+        <ion-content>
+            Help content!
+        </ion-content>
+    </ion-modal-view>
+</script>
+<script id="modal-about.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="gxc-header">
+            <h1 class="title">Sobre la aplicaci&oacute;n</h1>
+            <button class="button button-clear icon ion-close-round" ng-click="closeModal();"></button>
+        </ion-header-bar>
+        <ion-content style="text-align:center;">
+            <img src="img/icono-app.png" style="margin-top: 30px;width: 35%;" />
+            <h3>Calculadora de riesgo</h3>
+            <h4 style="color:#0088aa;">&iquest;Cu&aacute;nto vale tu informaci&oacute;n?</h4> v1.0
+            <br/>
+            <br/> Fernando Cisneros Escalante
+            <br/>Mario A. Garc&iacute;a Torrea
+            <br/>
+            <br/> Para el desarrollo de la aplicaci&oacute;n se utilizaron las siguientes librer&iacute;as y recursos:
+            <div class="list list-inset">
+                <ion-item>ionic Framework<br/>http://ionicframework.com/</ion-item>
+                <ion-item>odometer<br/>https://github.com/HubSpot/odometer</ion-item>
+            </div>
+
+        </ion-content>
+    </ion-modal-view>
+</script>
+
+</html>

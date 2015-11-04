@@ -1,0 +1,74 @@
+/*gxc-header*/
+
+#gxc-loader{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #3E8059;
+    z-index:10;
+}
+
+
+.gxc-header {
+    background-color: #3E8059;
+    color: white;
+    border: 0;
+}
+.gxc-header *,
+.gx-header .button,
+.button:hover {
+    color: white;
+}
+.gxc-menu,
+.gxc-menu ion-item {
+    background-color: #2B593E;
+    color: white;
+}
+.gxc-menu-header {
+    height: 130px;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+.gxc-menu-header img {
+    width: 30%;
+    margin: auto;
+    display: block;
+    margin-top: 20px;
+}
+.gxc-calc-header {
+    margin-top: 44px;
+}
+.hxc-list-calc {
+    top: 129px;
+    background-color: #253f21;
+}
+.gxc-calc-header .row {
+    background-color: #253f21;
+    color: white;
+    font-size: 9pt;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.calc-res-costo {
+    text-align: right;
+    font-size: 18pt;
+}
+.calc-nombre-empresa {
+    font-size: 15pt;
+}
+.badge-std {
+    background-color: #458824;
+}
+.badge-stv {
+    background-color: #cfb334;
+}
+.badge-spc {
+    background-color: #cf3434;
+}
+.item-checkbox::first-letter {
+    text-transform: uppercase;
+}
+.popup-container .popup{
+    width: 40%;
+}
