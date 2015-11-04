@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.gx.inai.calc" version="1.0.0">
+        <name>Calculadora Riesgos INAI</name>
+        <description>
+            Aplicacion que muestra el costo de la informacion de un usuario en base a la informacion que proporciona a una entidad.
+        </description>
+        <author email="f.cisneros.e@gmail.com">
+            Fernando Cisneros Escalante Mario Alberto Garcia Torrea
+        </author>
+
+        <preference name="phonegap-version" value="5.3.3" />
+
+        <content src="www/index.html" />
+        <access origin="*" />
+        <icon src="www/img/icono-app.png" />
+    </widget>

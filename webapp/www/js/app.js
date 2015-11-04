@@ -59,7 +59,8 @@ app.controller('RiskCalculatorController', function ($scope,$ionicPopup) {
         el: document.querySelector('.calc-res-costo .content'),
         value: 0,
         format: '(,ddd).dd',
-        duration: 500
+        duration: 1000,
+        animation: 'count'
     });
 
     $scope.items = cat_proc;
