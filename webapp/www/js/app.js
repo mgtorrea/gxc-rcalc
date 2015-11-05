@@ -48,7 +48,7 @@ setTimeout(function () {
 }, 1000);
 
 
-app.controller('RiskCalculatorController', function ($scope, $ionicPopup) {
+app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionicModal, EmpresasService) {
 
     var alertPopup = $ionicPopup.alert({
         title: 'Aviso',
@@ -66,6 +66,7 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup) {
     $scope.items = cat_proc;
     $scope.resultado = 0;
     $scope.items_seleccionados = [];
+    $scope.empresas = empresas;
 
     $scope.clickItem = function (item) {
         if (item.checked) {
@@ -75,7 +76,6 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup) {
             $scope.items_seleccionados.splice($scope.items_seleccionados.indexOf(item), 1);
             $scope.items.push(item);
         }
-        console.log(item);
         $scope.items.sort(function (a, b) {
             return a.name.localeCompare(b.name)
         });
@@ -84,6 +84,37 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup) {
         });
         $scope.resultado = $scope.recalcula();
         od.update($scope.resultado);
+    }
+
+    $scope.configuraEmpresa = function () {
+        $ionicModal.fromTemplateUrl('modal-empresa.html', {
+            scope: $scope,
+            animation: 'slide-in-down'
+        }).then(function (modal) {
+            $scope.filtro.nombre="";
+            $scope.modal = modal;
+            $scope.modal.show();
+        });
+        $scope.closeModal = function () {
+            $scope.modal.hide();
+        };
+    }
+
+    $scope.filtro = {
+        nombre: ''
+    };
+    $scope.data={empresaSeleccionada:""};
+
+    $scope.busca = function () {
+        EmpresasService.consulta($scope.filtro.nombre).then(function (res) {
+            $scope.empresas=res;
+        });
+    }
+    
+    $scope.seleccionaEmpresa=function(empresa){
+        $scope.data.empresaSeleccionada=empresa;
+        $scope.busca();
+        $scope.closeModal();
     }
 
     $scope.recalcula = function () {

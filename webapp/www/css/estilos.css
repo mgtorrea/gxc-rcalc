@@ -58,13 +58,13 @@
 .calc-nombre-empresa {
     font-size: 15pt;
 }
-.badge-std {
+.badge-std, .badge-verde{
     background-color: #458824;
 }
-.badge-stv {
+.badge-stv, .badge-amarillo {
     background-color: #cfb334;
 }
-.badge-spc {
+.badge-spc, .badge-rojo{
     background-color: #cf3434;
 }
 .item-checkbox::first-letter {

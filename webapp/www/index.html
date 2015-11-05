@@ -11,10 +11,11 @@
     <script type="text/javascript" src="js/ionic.bundle.min.js"></script>
     <script type="text/javascript" src="js/odometer.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/EmpresasService.js"></script>
 </head>
 
 <body ng-app="gxc-rcalc">
-   <div id="gxc-loader"></div>
+    <div id="gxc-loader"></div>
     <ion-side-menus>
         <!-- Center content -->
         <ion-side-menu-content drag-content="false">
@@ -33,7 +34,7 @@
                             <div class="col"></div>
                         </div>
                         <div class="row">
-                            <div class="col calc-nombre-empresa">La grupera</div>
+                            <div class="col calc-nombre-empresa" ng-click="configuraEmpresa();">{{data.empresaSeleccionada.name}}</div>
                             <div class="col calc-res-costo">$<span class="content"></span></div>
                         </div>
                         <div class="row" style="padding-top: 0;padding-bottom: 0;">
@@ -66,7 +67,8 @@
         <ion-side-menu side="left" class="gxc-menu" style="overflow-y: auto;" ng-controller="MenuController">
             <div class="gxc-menu-header">
                 <img src="img/icon-monochrome.png" />
-                <br/> Calculadora de riesgo<br/><span style="font-style: italic;">&quot;&iquest;Cu&aacute;nto vale tu informaci&oacute;n?&quot;</span>
+                <br/> Calculadora de riesgo
+                <br/><span style="font-style: italic;">&quot;&iquest;Cu&aacute;nto vale tu informaci&oacute;n?&quot;</span>
             </div>
             <ion-list>
                 <ion-item class="item-icon-left" ng-click="muestraAyuda();"><i class="icon ion-help-circled"></i>Ayuda</ion-item>
@@ -102,10 +104,30 @@
             <br/>
             <br/> Para el desarrollo de la aplicaci&oacute;n se utilizaron las siguientes librer&iacute;as y recursos:
             <div class="list list-inset">
-                <ion-item>ionic Framework<br/>http://ionicframework.com/</ion-item>
-                <ion-item>odometer<br/>https://github.com/HubSpot/odometer</ion-item>
+                <ion-item>ionic Framework
+                    <br/>http://ionicframework.com/</ion-item>
+                <ion-item>odometer
+                    <br/>https://github.com/HubSpot/odometer</ion-item>
             </div>
 
+        </ion-content>
+    </ion-modal-view>
+</script>
+<script id="modal-empresa.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="gxc-header">
+            <h1 class="title">Seleccione empresa</h1>
+            <button class="button button-clear icon ion-close-round" ng-click="closeModal();"></button>
+        </ion-header-bar>
+        <ion-content style="text-align:center;">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Buscar" ng-model="filtro.nombre" ng-change="busca();">
+            </label>
+            <ion-list>
+                <ion-item ng-repeat="empresa in empresas" ng-click="seleccionaEmpresa(empresa);">
+                    <span class="badge {{empresa.idx}}">&nbsp;</span> {{empresa.name}}</ion-item>
+            </ion-list>
         </ion-content>
     </ion-modal-view>
 </script>
