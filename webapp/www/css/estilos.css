@@ -1,22 +1,12 @@
 /*gxc-header*/
 
-#gxc-loader{
+#gxc-loader {
     position: absolute;
     width: 100%;
     height: 100%;
     background-color: #3E8059;
-    z-index:10;
+    z-index: 10;
 }
-
-
-.gxc-header {
-    background-color: #3E8059;
-    color: white;
-    border: 0;
-    background-size: 0;
-}
-.gxc-header *,
-.gx-header .button,
 .button:hover {
     color: white;
 }
@@ -38,37 +28,71 @@
     margin-top: 20px;
 }
 .gxc-calc-header {
-    margin-top: 44px;
+    margin-top: 0;
+    color: white;
+    padding: 0;
+}
+.btn-menu {
+    float: left;
+    position: fixed;
+    color: white;
+    font-size: 20pt;
 }
 .hxc-list-calc {
-    top: 128px;
-    background-color: #253f21;
+    top: 107px;
+    background-color: #005500;
 }
-.gxc-calc-header .row {
-    background-color: #253f21;
-    color: white;
-    font-size: 9pt;
-    padding-top: 0;
-    padding-bottom: 0;
+.calc-res-costo,
+.calc-nombre-empresa {
+    text-align: center;
+    padding: 3px;
+    font-weight: bold;
 }
 .calc-res-costo {
-    text-align: right;
-    font-size: 18pt;
+    font-size: 20pt;
+    background-color: #3E8059;
+    padding-top: 15px;
+    height: 70px;
+}
+.calc-res-costo .label,
+.calc-nombre-empresa .label {
+    font-size: 10pt;
 }
 .calc-nombre-empresa {
-    font-size: 15pt;
+    font-size: 11pt;
+    background-color: #005500;
+    height: 36px;
+    text-transform: uppercase;
+    line-height: 36px;
+    padding: 0;
+    /*background-color: #253f21;*/
 }
-.badge-std, .badge-verde{
+.badge-std,
+.badge-verde {
     background-color: #458824;
 }
-.badge-stv, .badge-amarillo {
+.badge-stv,
+.badge-amarillo {
     background-color: #cfb334;
 }
-.badge-spc, .badge-rojo{
+.badge-spc,
+.badge-rojo {
     background-color: #cf3434;
 }
 .item-checkbox::first-letter {
     text-transform: uppercase;
+}
+
+span.odometer-digit:first-child::before {
+    content: '$';
+    margin-left: -23px;
+    display: inline-block;
+    float: left;
+}
+
+.odometer {
+    font-size: 26pt;
+    line-height: 22pt;
 }
 /*TABLET
 .popup-container .popup{
