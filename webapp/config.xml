@@ -4,8 +4,11 @@
         <description>
             Aplicacion que muestra el costo de la informacion de un usuario en base a la informacion que proporciona a una entidad.
         </description>
-        <author email="f.cisneros.e@gmail.com">
-            Fernando Cisneros Escalante Mario Alberto Garcia Torrea
+        <author email="fer.cisneros.e@gmail.com">
+            Fernando Cisneros Escalante
+        </author>
+        <author email="mario.gtorrea@gmail.com">
+            Mario Alberto Garcia Torrea
         </author>
         <preference name="phonegap-version" value="5.3.3" />
         <content src="index.html" />
