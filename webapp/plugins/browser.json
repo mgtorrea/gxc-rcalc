@@ -6,6 +6,13 @@
     "config_munge": {
         "files": {}
     },
-    "installed_plugins": {},
+    "installed_plugins": {
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "com.gx.inai.calc"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.gx.inai.calc"
+        }
+    },
     "dependent_plugins": {}
 }

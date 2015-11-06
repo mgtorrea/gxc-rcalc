@@ -92,6 +92,7 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
             animation: 'slide-in-down'
         }).then(function (modal) {
             $scope.filtro.nombre="";
+            $scope.busca();
             $scope.modal = modal;
             $scope.modal.show();
         });
@@ -113,7 +114,7 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
     
     $scope.seleccionaEmpresa=function(empresa){
         $scope.data.empresaSeleccionada=empresa;
-        $scope.busca();
+        //$scope.busca();
         $scope.closeModal();
     }
 

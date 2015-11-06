@@ -1,11 +1,26 @@
 /*gxc-header*/
 
+body *{
+    font-family: 'Open Sans';
+}
+
 #gxc-loader {
     position: absolute;
     width: 100%;
     height: 100%;
     background-color: #3E8059;
     z-index: 10;
+}
+.gxc-header {
+    background-color: #3E8059;
+    color: white;
+    border: 0;
+    background-size: 0;
+}
+.gxc-header *,
+.gx-header .button,
+.button:hover {
+    color: white;
 }
 .button:hover {
     color: white;
@@ -82,18 +97,17 @@
 .item-checkbox::first-letter {
     text-transform: uppercase;
 }
-
 span.odometer-digit:first-child::before {
     content: '$';
     margin-left: -23px;
     display: inline-block;
     float: left;
 }
-
 .odometer {
     font-size: 26pt;
     line-height: 22pt;
 }
+
 /*TABLET
 .popup-container .popup{
     width: 40%;
