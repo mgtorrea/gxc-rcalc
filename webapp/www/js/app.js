@@ -101,6 +101,7 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
         });
         $scope.closeModal = function () {
             $scope.modal.hide();
+            $scope.modal.remove();
         };
     }
     
@@ -116,6 +117,7 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
         });
         $scope.closeModal = function () {
             $scope.modal.hide();
+            $scope.modal.remove();
         };
     }
 
@@ -180,6 +182,7 @@ app.controller('MenuController', function ($scope, $ionicModal) {
         });
         $scope.closeModal = function () {
             $scope.modal.hide();
+            $scope.modal.remove();
         };
     }
 
@@ -193,6 +196,7 @@ app.controller('MenuController', function ($scope, $ionicModal) {
         });
         $scope.closeModal = function () {
             $scope.modal.hide();
+            $scope.modal.remove();
         };
     }
 });
