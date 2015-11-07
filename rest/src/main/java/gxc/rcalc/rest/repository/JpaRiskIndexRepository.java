@@ -39,7 +39,7 @@ public class JpaRiskIndexRepository implements RiskIndexRepository {
 	/* Filters out only latest riskIndex entity by each company. 
 	 * ugly but easier to implement than in jpa query 
 	 */
-	private Collection<RiskIndex> latestByCompany(Collection<RiskIndex> indexes) {
+	private static Collection<RiskIndex> latestByCompany(Collection<RiskIndex> indexes) {
 		Map<Long,RiskIndex> map = new HashMap<Long,RiskIndex>();
 		for(RiskIndex r : indexes) {
 			Long company = r.getCompany().getId();

@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+endpoints:
+  enabled: false
+  health:
+    enabled: true
+    sensitive: false
+
+
+index:
+  resource: classpath:index-dummy.csv
+  delimiter: ','
+
+
+#Database Configuration
+db:
+  driver:
+  url:
+  username: 
+  password: 
+
+#Hibernate Configuration
+hibernate:
+  dialect: org.hibernate.dialect.PostgreSQLDialect
+  hbm2ddl:
+    auto: create
+    import_files:
+  ejb.naming_strategy:
+  show_sql: false
+  format_sql: true
