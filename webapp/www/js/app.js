@@ -21,6 +21,7 @@ for (var i = 0; i < categorias.estandar.length; i++) {
     cat_proc.push({
         name: categorias.estandar[i],
         cat: 'std',
+        badge:'$',
         checked: false
     });
 }
@@ -28,6 +29,7 @@ for (var i = 0; i < categorias.sensible.length; i++) {
     cat_proc.push({
         name: categorias.sensible[i],
         cat: 'stv',
+        badge:'$$',
         checked: false
     });
 }
@@ -35,6 +37,7 @@ for (var i = 0; i < categorias.especial.length; i++) {
     cat_proc.push({
         name: categorias.especial[i],
         cat: 'spc',
+        badge:'$$$',
         checked: false
     });
 }
@@ -89,12 +92,27 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
     $scope.configuraEmpresa = function () {
         $ionicModal.fromTemplateUrl('modal-empresa.html', {
             scope: $scope,
-            animation: 'slide-in-down'
+            animation: 'slide-in-up'
         }).then(function (modal) {
             $scope.filtro.nombre="";
             $scope.busca();
             $scope.modal = modal;
             $scope.modal.show();
+        });
+        $scope.closeModal = function () {
+            $scope.modal.hide();
+        };
+    }
+    
+    $scope.muestraDetalleCalculo = function () {
+        $ionicModal.fromTemplateUrl('modal-detalle-calculo.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modal = modal;
+            $scope.modal.show().then(function(){
+                katex.render("V \\approx \\frac{\\sum_{i=1}^{a}{E_i}+\\sum_{j=1}^{b}{S_j}+\\sum_{k=1}^{c}{P_k}}{a+b+c}*EP*UM", document.querySelector("#formula"), { displayMode: true });
+            });
         });
         $scope.closeModal = function () {
             $scope.modal.hide();

@@ -16,8 +16,10 @@ var empresas = [{
     "riskIndex": 3.9
 }];
 
+//ESTABLECE BADGES
 for (var i = 0; i < empresas.length; i++) {
     var emp = empresas[i];
+    empresas[i].name=empresas[i].name.toUpperCase();
     if (emp.riskIndex >= 0 && emp.riskIndex <= 2.5) {
         empresas[i].idx = 'badge-verde';
     } else {

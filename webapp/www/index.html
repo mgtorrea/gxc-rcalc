@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=no, width=device-width" />
+    <link rel="stylesheet" href="katex/katex.min.css">
     <link rel="stylesheet" type="text/css" href="css/ionic.min.css">
     <link rel="stylesheet" type="text/css" href="css/animate.css">
     <link rel="stylesheet" type="text/css" href="css/fonts.css">
@@ -13,6 +14,7 @@
     <script type="text/javascript" src="js/odometer.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/EmpresasService.js"></script>
+    <script src="katex/katex.min.js"></script>
 </head>
 
 <body ng-app="gxc-rcalc">
@@ -27,12 +29,13 @@
                 <div id="calc_principal" ng-controller="RiskCalculatorController">
                     <div class="gxc-calc-header">
                         <button class="button button-icon ion-navicon btn-menu" menu-toggle="left"> </button>
-                        <div class="calc-res-costo">
+                        <div class="calc-res-costo" ng-click="muestraDetalleCalculo()">
                             <span class="content" style="margin-left: 15px;"></span>
                             <div class="label">Costo calculado</div>
                         </div>
                         <div class="calc-nombre-empresa" ng-click="configuraEmpresa();">
-                            <div>Empresa: {{data.empresaSeleccionada.name}}</div>
+                            <div ng-if="data.empresaSeleccionada == ''">Seleccione una empresa.</div>
+                            <div ng-if="data.empresaSeleccionada.name != ''">Empresa: {{data.empresaSeleccionada.name}}</div>
                         </div>
                     </div>
                     <ion-content class="hxc-list-calc">
@@ -42,14 +45,14 @@
                                 <label class="checkbox">
                                     <input type="checkbox" ng-model="item.checked" ng-checked="item.checked" ng-click="clickItem(item);">
                                 </label>
-                                {{item.name}}<span class="badge badge-{{item.cat}}">&nbsp;</span>
+                                {{item.name}}<span class="badge badge-{{item.cat}}">{{item.badge}}</span>
                             </ion-item>
                             <ion-item class="item-divider">Otra informaci&oacute;n</ion-item>
                             <ion-item class="item-icon-left item-icon-right item-checkbox" ng-repeat="item in items">
                                 <label class="checkbox">
                                     <input type="checkbox" ng-model="item.checked" ng-checked="item.checked" ng-click="clickItem(item);">
                                 </label>
-                                {{item.name}}<span class="badge badge-{{item.cat}}">&nbsp;</span>
+                                {{item.name}}<span class="badge badge-{{item.cat}}">{{item.badge}}</span>
                             </ion-item>
                         </ion-list>
                     </ion-content>
@@ -108,12 +111,12 @@
 </script>
 <script id="modal-empresa.html" type="text/ng-template">
     <ion-modal-view>
-        <ion-header-bar class="gxc-header">
-            <h1 class="title">Seleccione empresa</h1>
+        <ion-header-bar class="gxc-header" style="height: 80px;padding-top:16px;">
+            <span style="margin-left: 16px;">Seleccione la empresa a quien le proporcionar&aacute; su informaci&oacute;n o conteste la encuesta para calificarla.</span>
             <button class="button button-clear icon ion-close-round" ng-click="closeModal();"></button>
         </ion-header-bar>
-        <ion-content style="text-align:center;">
-            <label class="item item-input">
+        <ion-content style="text-align:center;top: 80px;background-color:#3E8059;">
+            <label class="item-input gxc-search">
                 <i class="icon ion-search placeholder-icon"></i>
                 <input type="text" placeholder="Buscar" ng-model="filtro.nombre" ng-change="busca();">
             </label>
@@ -121,6 +124,27 @@
                 <ion-item ng-repeat="empresa in empresas" ng-click="seleccionaEmpresa(empresa);">
                     <span class="badge {{empresa.idx}}">&nbsp;</span> {{empresa.name}}</ion-item>
             </ion-list>
+        </ion-content>
+        <ion-footer-bar>
+            <button class="button pull-right button-outline button-positive">Encuesta</button>
+        </ion-footer-bar>
+    </ion-modal-view>
+</script>
+<script id="modal-detalle-calculo.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="gxc-header" style="height: 80px;padding-top:16px;">
+            <span style="margin-left: 16px;">Al an&aacute;lisis de la informaci&oacute;n que seleccionaste, arroj&oacute; el siguiente resultado:</span>
+            <button class="button button-outline icon ion-close-round" ng-click="closeModal();"></button>
+        </ion-header-bar>
+        <ion-content style="text-align:center;top: 80px;">
+           <h4>Consejos</h4>
+           Por el tipo de informaci&oacute;n que proporcionaste el valor, en el mercado negro, podr&iacute;a ser de $.... <br/>
+           La informaci&oacute;n cr&iacute;tica que proporcionaste fue:
+           .....
+            <h4>F&oacute;rmula</h4> La f&oacute;rmula utilizada para el c&aacute;lculo, es la siguiente:
+            <div id="formula" style="width:100%;height:80px;"></div>
+            Para el caso calculado, se tienen los siguientes valores:
+
         </ion-content>
     </ion-modal-view>
 </script>
