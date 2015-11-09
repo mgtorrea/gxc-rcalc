@@ -43,5 +43,15 @@ public class TextUtils {
         }
         return costs[b.length()];
     }
+	
+	public static String coalesce(String... str) {
+		for(String s : str ) {
+			if(s != null) {
+				return s;
+			}
+		}
+		
+		return null;
+	}
 
 }

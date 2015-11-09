@@ -17,9 +17,8 @@ public class JpaRiskIndexRepository implements RiskIndexRepository {
 	private JpaRiskIndexRepositoryDelegate delegate;
 	
 	@Override
-	public RiskIndex createOrUpdate(RiskIndex index) {
-		// TODO: implement if needed
-		throw new UnsupportedOperationException();
+	public RiskIndex create(RiskIndex index) {
+		return delegate.save(index);
 	}
 
 	@Override

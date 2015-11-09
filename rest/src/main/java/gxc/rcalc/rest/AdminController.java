@@ -2,8 +2,10 @@ package gxc.rcalc.rest;
 
 import gxc.rcalc.rest.entity.Company;
 import gxc.rcalc.rest.entity.Complain;
+import gxc.rcalc.rest.entity.RiskIndex;
 import gxc.rcalc.rest.repository.CompanyRepository;
 import gxc.rcalc.rest.repository.ComplainRepository;
+import gxc.rcalc.rest.repository.RiskIndexRepository;
 import gxc.rcalc.rest.util.TextUtils;
 
 import java.util.ArrayList;
@@ -40,12 +42,31 @@ public class AdminController {
 	@Autowired
 	private ComplainRepository complains;
 	
+	@Autowired
+	private RiskIndexRepository risks;
+	
+	@RequestMapping(value = "/index", method = RequestMethod.PUT)
+	public RiskIndexDto addRiskIndex(@RequestBody RiskIndexDto ri) {
+		Company company = findOrCreateCompany(ri.getCompanyId(), ri.getCompanyName(), null);
+		if(company == null) {
+			LOGGER.error("Could not create RiskIndex without a Company name or id");
+			return null; // TODO: add error object
+		}
+		
+		RiskIndex entity = new RiskIndex(
+				ri.getRiskIndex(), 
+				new Date(), 
+				company);
+				
+		return RiskIndexController.dto(risks.create(entity)); // FIXME: take dto() method out to a utils class
+	}
+	
 	@RequestMapping(value = "/complains/{name}", method = RequestMethod.GET)
 	public List<ComplainDto> findByCompany(@PathVariable String name) {
 		
 		Company company = findMostSimilarByName(name);
 		if(company == null) {
-			LOGGER.error("Could find Complains with the given Name: {}", name);
+			LOGGER.error("Could not find Complains with the given companyName: {}", name);
 			return Collections.emptyList();
 		}
 		
@@ -59,7 +80,8 @@ public class AdminController {
 	
 	@RequestMapping(value = "/complains", method = RequestMethod.PUT)
 	public ComplainDto addComplain(@RequestBody ComplainDto complain) {
-		Company company = findOrCreateCompany(complain);
+		Company company = 
+				findOrCreateCompany(complain.getCompanyId(), complain.getCompanyName(), complain.getCompanyUrl());
 		if(company == null) {
 			LOGGER.error("Could not create Complain without a Company name or id");
 			return null; // TODO: add error object
@@ -80,7 +102,7 @@ public class AdminController {
 		}
 		
 		ComplainDto dto = new ComplainDto();
-		dto.setCompanyId(c.getId());
+		dto.setCompanyId(c.getCompany().getId());
 		dto.setCompanyName(c.getCompany().getName());
 		dto.setComments(c.getComments());
 		dto.setRating(c.getRating());
@@ -91,9 +113,8 @@ public class AdminController {
 	/*
 	 * Returns the Company found by id or the most similar by name
 	 */
-	private Company findOrCreateCompany(ComplainDto dto) {
-		Long id = dto.getCompanyId();
-		String name = TextUtils.normalize(dto.getCompanyName());
+	private Company findOrCreateCompany(Long id, String companyName, String url) {
+		String name = TextUtils.normalize(companyName);
 		if(id != null && id > 0) {
 			return companies.findById(id);
 		} else if(StringUtils.hasText(name)) {
@@ -102,7 +123,7 @@ public class AdminController {
 			
 			/* is new company */
 			if(current == null) {
-				current = new Company(name, dto.getCompanyUrl()); // TODO: Add url detection/validation
+				current = new Company(name, url); // TODO: Add url detection/validation
 				current = companies.createOrUpdate(current);
 			}
 			
@@ -116,10 +137,11 @@ public class AdminController {
 	 * Finds the most similar company by Name (using levenshtein distance)
 	 */
 	private Company findMostSimilarByName(String name) {
-		int shortest = -1;
+		final String companyName = TextUtils.normalize(name);
+		int shortest = Integer.MAX_VALUE;
 		Company company = null;
-		for(Company c : companies.findByName(name)) {
-			int distance = TextUtils.levenshtein(name, c.getName());
+		for(Company c : companies.findByName(companyName)) {
+			int distance = TextUtils.levenshtein(companyName, c.getName());
 			if(distance < shortest) {
 				shortest = distance;
 				company = c;
@@ -128,6 +150,5 @@ public class AdminController {
 		
 		return company;
 	}
-	
 
 }

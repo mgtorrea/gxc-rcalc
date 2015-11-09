@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public interface RiskIndexRepository {
 	
-	RiskIndex createOrUpdate(RiskIndex index);
+	RiskIndex create(RiskIndex index);
 	
 	RiskIndex findById(Long id);
 	

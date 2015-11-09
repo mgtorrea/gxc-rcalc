@@ -4,10 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import gxc.rcalc.rest.config.PersistenceConfig;
+import gxc.rcalc.rest.entity.Company;
 import gxc.rcalc.rest.entity.RiskIndex;
 import gxc.rcalc.rest.repository.RiskIndexRepository;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +33,22 @@ public class JpaRiskIndexRepositoryTest {
 	
 	@Autowired
 	private RiskIndexRepository repository;
+	
+	@Test
+	public void createRiskIndexOk() {
+		// check current RiskIndex for id = 1
+		RiskIndex current = repository.findById(1L);
+		assertTrue(4.3F == current.getRisk());
+		
+		Company c = new Company(1L, null, null);
+		RiskIndex ri = new RiskIndex(1F, new Date(), c);
+		RiskIndex created = repository.create(ri);
+		assertNotNull(created);
+		for(RiskIndex r : repository.findByCompanyName("aeros")) {
+			assertNotNull(r);
+			assertTrue(1F == r.getRisk());
+		}
+	}
 
 	@Test
 	public void findAllOk() {
@@ -39,7 +57,7 @@ public class JpaRiskIndexRepositoryTest {
 		assertEquals(4,indexes.size());
 		for(RiskIndex r : indexes) {
 			assertNotNull(r);
-			assertTrue(r.getRisk() > 1);
+			assertTrue(r.getRisk() >= 1);
 		}
 	}
 	

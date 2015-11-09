@@ -1,30 +1,31 @@
 package gxc.rcalc.rest;
 
+import java.util.Date;
+
 public class RiskIndexDto {
 	
-	/* Risk Index id */
-	private Long id;
+	private Long companyId;
 	
-	/* Company name */
-	private String name;
+	private String companyName;
 	
-	/* Risk index value */
 	private Float riskIndex;
+	
+	private Date date;
 
-	public Long getId() {
-		return id;
+	public Long getCompanyId() {
+		return companyId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCompanyId(Long id) {
+		this.companyId = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getCompanyName() {
+		return companyName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCompanyName(String name) {
+		this.companyName = name;
 	}
 
 	public Float getRiskIndex() {
@@ -34,4 +35,14 @@ public class RiskIndexDto {
 	public void setRiskIndex(Float riskIndex) {
 		this.riskIndex = riskIndex;
 	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	
 }

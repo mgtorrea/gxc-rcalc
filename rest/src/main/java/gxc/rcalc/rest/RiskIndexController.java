@@ -55,11 +55,12 @@ public class RiskIndexController {
 		return dto(repository.findByCompanyName(normalized));
 	}
 	
-	private static RiskIndexDto dto(RiskIndex ri) {
+	public static RiskIndexDto dto(RiskIndex ri) {
 		RiskIndexDto dto = new RiskIndexDto();
-		dto.setId(ri.getId());
-		dto.setName(coalesce(ri.getCompany().getName(), ri.getCompany().getUrl()));
+		dto.setCompanyId(ri.getCompany().getId());
+		dto.setCompanyName(TextUtils.coalesce(ri.getCompany().getName(), ri.getCompany().getUrl()));
 		dto.setRiskIndex(ri.getRisk());
+		dto.setDate(ri.getCreatedAt());
 		
 		return dto;
 	}
@@ -71,16 +72,6 @@ public class RiskIndexController {
 		}
 		
 		return list;
-	}
-	
-	private static String coalesce(String... str) {
-		for(String s : str ) {
-			if(s != null) {
-				return s;
-			}
-		}
-		
-		return null;
 	}
 
 }
