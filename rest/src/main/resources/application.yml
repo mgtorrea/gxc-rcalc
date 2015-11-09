@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
 
 endpoints:
   enabled: false
@@ -24,3 +24,6 @@ hibernate:
     naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
   show_sql: false
   format_sql: true
+
+
+logging.level.gxc.rcalc: ${LOGGING_LEVEL:INFO}

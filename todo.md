@@ -11,3 +11,4 @@ TODO
 	* define storage impl
 	* update risk index after calculation via admin endpoint 
 * add other crawlers
+* enable heroku deployment for rest module
