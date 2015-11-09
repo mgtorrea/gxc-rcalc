@@ -5,7 +5,7 @@ public class RiskIndexDto {
 	/* Risk Index id */
 	private Long id;
 	
-	/* Organization name */
+	/* Company name */
 	private String name;
 	
 	/* Risk index value */

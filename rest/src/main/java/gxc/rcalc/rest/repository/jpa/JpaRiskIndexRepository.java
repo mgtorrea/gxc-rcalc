@@ -1,6 +1,7 @@
-package gxc.rcalc.rest.repository;
+package gxc.rcalc.rest.repository.jpa;
 
 import gxc.rcalc.rest.entity.RiskIndex;
+import gxc.rcalc.rest.repository.RiskIndexRepository;
 
 import java.util.Collection;
 import java.util.HashMap;

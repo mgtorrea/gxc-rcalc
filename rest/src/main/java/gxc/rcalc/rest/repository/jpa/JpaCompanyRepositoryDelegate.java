@@ -1,6 +1,6 @@
-package gxc.rcalc.rest.repository;
+package gxc.rcalc.rest.repository.jpa;
 
-import gxc.rcalc.rest.entity.RiskIndex;
+import gxc.rcalc.rest.entity.Company;
 
 import java.util.List;
 
@@ -9,14 +9,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-public interface JpaRiskIndexRepositoryDelegate extends CrudRepository<RiskIndex,Long> {
+public interface JpaCompanyRepositoryDelegate extends CrudRepository<Company,Long> {
 	
 	@Transactional(readOnly = true)
-	RiskIndex findById(Long id);
+	Company findById(Long id);
 	
 	@Transactional(readOnly = true)
-	List<RiskIndex> findLatestByCompanyNameStartingWith(String name);
+	List<Company> findByNameStartingWith(String name);
 	
 	@Transactional(readOnly = true)
-	List<RiskIndex> findAll();
+	List<Company> findAll();
+	
 }

@@ -31,10 +31,15 @@ public class Company implements Serializable {
 	public Company() {
 		
 	}
-
-	public Company(String name, String url) {
+	
+	public Company(Long id, String name, String url) {
+		this.id = id;
 		this.name = name;
 		this.url = url;
+	}
+
+	public Company(String name, String url) {
+		this(null,name,url);
 	}
 
 	public Long getId() {

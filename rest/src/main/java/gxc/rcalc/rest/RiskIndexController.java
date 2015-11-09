@@ -2,6 +2,7 @@ package gxc.rcalc.rest;
 
 import gxc.rcalc.rest.entity.RiskIndex;
 import gxc.rcalc.rest.repository.RiskIndexRepository;
+import gxc.rcalc.rest.util.TextUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,16 +19,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Main RestController
+ * RiskIndex Rest Controller (public endpoints)
  * 
  * @author fcisneros
  * 
  */
 @RestController
 @RequestMapping("/index")
-public class Controller {
+public class RiskIndexController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(Controller.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RiskIndexController.class);
 	
 	@Autowired
 	RiskIndexRepository repository;
@@ -49,7 +50,7 @@ public class Controller {
 			return Collections.emptyList();
 		}
 		
-		final String normalized = name.trim().toLowerCase(); // TODO: add external normalizer, maybe using a Lucene Analyzer
+		final String normalized = TextUtils.normalize(name);
 		
 		return dto(repository.findByCompanyName(normalized));
 	}
