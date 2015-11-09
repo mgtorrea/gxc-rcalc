@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -Dlogging.level.gxc.rcalc=INFO -jar target/rcalc-rest-0.1-SNAPSHOT.jar
+web: java -Dserver.port=$PORT -Dlogging.level.gxc.rcalc=INFO -jar rest/target/rcalc-rest-0.1-SNAPSHOT.jar
