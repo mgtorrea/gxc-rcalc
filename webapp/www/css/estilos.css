@@ -1,9 +1,8 @@
 /*gxc-header*/
 
-body *{
+body * {
     font-family: 'Open Sans';
 }
-
 #gxc-loader {
     position: absolute;
     width: 100%;
@@ -11,18 +10,20 @@ body *{
     background-color: #3E8059;
     z-index: 10;
 }
-.gxc-header {
+.gxc-header,
+.bar-footer {
     background-color: #3E8059;
     color: white;
     border: 0;
     background-size: 0;
 }
-.gxc-search{
+.gxc-search {
     background-color: #3E8059;
     border: 0;
 }
-.gxc-search *, .gxc-search input{
-    color:white;
+.gxc-search *,
+.gxc-search input {
+    color: white;
 }
 .gxc-header *,
 .gx-header .button,
@@ -87,32 +88,33 @@ body *{
     height: 36px;
     line-height: 36px;
     padding: 0;
-    -webkit-transition: all .5s; /* Safari */
+    -webkit-transition: all .5s;
+    /* Safari */
     transition: all .5s;
     transition-timing-function: ease-in-out;
-    top:0;
+    top: 0;
     /*background-color: #253f21;*/
 }
-.expand{
-    position:fixed;
-    top:0;
-    z-index:1;
-    height:100%;
+.expand {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    height: 100%;
 }
 .badge-std,
 .badge-verde {
     background-color: #458824;
-    color:white;
+    color: white;
 }
 .badge-stv,
 .badge-amarillo {
     background-color: #cfb334;
-    color:white;
+    color: white;
 }
 .badge-spc,
 .badge-rojo {
     background-color: #cf3434;
-    color:white;
+    color: white;
 }
 .item-checkbox::first-letter {
     text-transform: uppercase;
@@ -132,6 +134,24 @@ span.odometer-digit:first-child::before {
 .popup-container .popup{
     width: 40%;
 }*/
-.item{
+
+.item {
     font-size: 11pt;
+}
+.button-footer {
+    color: white;
+    border-color: white;
+}
+
+.blurred *{
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    filter: grayscale(100%);
 }

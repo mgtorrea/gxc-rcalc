@@ -70,6 +70,7 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
     $scope.resultado = 0;
     $scope.items_seleccionados = [];
     $scope.empresas = empresas;
+    $scope.blurredClass = " blurred"
 
     $scope.clickItem = function (item) {
         if (item.checked) {
@@ -134,6 +135,7 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
     
     $scope.seleccionaEmpresa=function(empresa){
         $scope.data.empresaSeleccionada=empresa;
+        $scope.blurredClass="";
         //$scope.busca();
         $scope.closeModal();
     }

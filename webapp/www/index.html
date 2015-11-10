@@ -28,17 +28,19 @@
             <ion-pane>
                 <div id="calc_principal" ng-controller="RiskCalculatorController">
                     <div class="gxc-calc-header">
-                        <button class="button button-icon ion-navicon btn-menu" menu-toggle="left"> </button>
-                        <div class="calc-res-costo" ng-click="muestraDetalleCalculo()">
+                        <button class="button button-icon ion-navicon btn-menu" menu-toggle="left" style="top: 4px;"> </button>
+                        <div class="calc-res-costo">
                             <span class="content" style="margin-left: 15px;"></span>
                             <div class="label">Costo calculado</div>
                         </div>
+                        <button class="button button-icon ion-ios-information-outline btn-menu" style="float: right; right: 0;top: 6px;font-size: 25pt;" ng-if="resultado>0" ng-click="muestraDetalleCalculo()"> </button>
                         <div class="calc-nombre-empresa" ng-click="configuraEmpresa();">
                             <div ng-if="data.empresaSeleccionada == ''">Seleccione una empresa</div>
                             <div ng-if="data.empresaSeleccionada.name != ''">Empresa: {{data.empresaSeleccionada.name}}</div>
                         </div>
                     </div>
-                    <ion-content class="hxc-list-calc">
+                    <div style="bottom:0;top: 116px;left:0;right:0;position:fixed;background-color:black;z-index:1;opacity:0.5;" ng-if="data.empresaSeleccionada == ''"></div>
+                    <ion-content class="hxc-list-calc{{blurredClass}}">
                         <ion-list>
                             <ion-item class="item-divider">Informaci&oacute;n seleccionada</ion-item>
                             <ion-item class="item-icon-left item-icon-right item-checkbox" ng-repeat="item in items_seleccionados">
@@ -68,7 +70,7 @@
             </div>
             <ion-list>
                 <ion-item class="item-icon-left" ng-click="muestraAyuda();"><i class="icon ion-help-circled"></i>Ayuda</ion-item>
-                <ion-item class="item-icon-left" ng-click="muestraAcercaDe();"><i class="icon ion-information-circled"></i>Sobre la aplicaci&oacute;n</ion-item>
+                <ion-item class="item-icon-left" ng-click="muestraAcercaDe();"><i class="icon ion-chatbubble-working"></i>Sobre la aplicaci&oacute;n</ion-item>
             </ion-list>
         </ion-side-menu>
     </ion-side-menus>
@@ -104,6 +106,8 @@
                     <br/>http://ionicframework.com/</ion-item>
                 <ion-item>odometer
                     <br/>https://github.com/HubSpot/odometer</ion-item>
+                <ion-item>katex
+                    <br/>https://github.com/Khan/KaTeX</ion-item>
             </div>
 
         </ion-content>
@@ -126,7 +130,7 @@
             </ion-list>
         </ion-content>
         <ion-footer-bar>
-            <button class="button pull-right button-outline button-positive">Encuesta</button>
+            <button class="button pull-right button-outline button-footer">Encuesta</button>
         </ion-footer-bar>
     </ion-modal-view>
 </script>
@@ -137,14 +141,30 @@
             <button class="button button-outline icon ion-close-round" ng-click="closeModal();"></button>
         </ion-header-bar>
         <ion-content style="text-align:center;top: 80px;">
-           <h4>Consejos</h4>
-           Por el tipo de informaci&oacute;n que proporcionaste el valor, en el mercado negro, podr&iacute;a ser de $.... <br/>
-           La informaci&oacute;n cr&iacute;tica que proporcionaste fue:
-           .....
-            <h4>F&oacute;rmula</h4> La f&oacute;rmula utilizada para el c&aacute;lculo, es la siguiente:
-            <div id="formula" style="width:100%;height:80px;"></div>
-            Para el caso calculado, se tienen los siguientes valores:
+            <div class="card">
+                <div class="item item-text-wrap">
+                    Por el tipo de informaci&oacute;n que proporcionaste, su valor en el mercado negro podr&iacute;a ser de {{resultado| currency}}
+                </div>
+            </div>
+            <div class="card">
+                <div class="item item-divider">
+                    Informaci&oacute;n proporcionada
+                </div>
+                <div class="item item-text-wrap">
+                    La informaci&oacute;n cr&iacute;tica que proporcionaste fue: .....
+                </div>
+            </div>
 
+            <div class="card">
+                <div class="item item-divider">
+                    C&aacute;lculo
+                </div>
+                <div class="item item-text-wrap">
+                    La f&oacute;rmula utilizada para el c&aacute;lculo, es la siguiente:
+                    <div id="formula" style="width:100%;height:80px;"></div>
+                    Para el caso calculado, se tienen los siguientes valores:
+                </div>
+            </div>
         </ion-content>
     </ion-modal-view>
 </script>
