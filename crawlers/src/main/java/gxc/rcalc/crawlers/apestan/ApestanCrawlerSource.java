@@ -21,8 +21,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import com.google.gson.Gson;
+
 /**
- * CrawlerTask implementation for apestan.com site crawling
+ * Flume source implementation for apestan.com site crawling
  * 
  * @author fcisneros
  *
@@ -33,6 +35,8 @@ public class ApestanCrawlerSource extends AbstractSource implements Configurable
 			"https://www.apestan.com/lista-completa-de-companias.html/period_year";
 	
 	private Iterator<Element> companies;
+	
+	private Gson gson = new Gson();
 	
 	@Override
 	public void configure(Context ctx) {
@@ -61,14 +65,16 @@ public class ApestanCrawlerSource extends AbstractSource implements Configurable
 	public Status process() throws EventDeliveryException {
 		if(!companies.hasNext()) {
 			stop(); // is manual stop valid ?
+			return Status.BACKOFF;
 		}
 		
 		Status status = null;
-
 		try {
 			// Poll data
 			
-			Event e = crawlNextCompany();
+			Map<String,Object> map = crawlCompany(companies.next());
+			String body = gson.toJson(map);
+			Event e = EventBuilder.withBody(body.getBytes());
 
 			// Store the Event into this Source's associated Channel(s)
 			getChannelProcessor().processEvent(e);
@@ -86,14 +92,6 @@ public class ApestanCrawlerSource extends AbstractSource implements Configurable
 		}
 		
 		return status;	
-	}
-	
-	private Event crawlNextCompany() throws IOException {
-		Map<String,Object> map = crawlCompany(companies.next());
-		
-		// TODO: serialize company Map
-		Event e = new EventBuilder().withBody("".getBytes());
-		return e;
 	}
 	
 	private Map<String,Object> crawlCompany(Element e) throws IOException {
