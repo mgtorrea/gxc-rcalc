@@ -20,8 +20,17 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 			</plugin>
 
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
+			    <groupId>com.github.jrh3k5</groupId>
+			    <artifactId>flume-plugin-maven-plugin</artifactId>
+			    <version>1.1</version>
+			    <executions>
+                    <execution>
+                        <id>build-project-plugin</id>
+                        <goals>
+                            <goal>build-project-plugin</goal>
+                        </goals>
+                    </execution>
+                </executions>
 			</plugin>
 
 		</plugins>
@@ -44,6 +53,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 			<groupId>org.apache.flume</groupId>
 			<artifactId>flume-ng-core</artifactId>
 			<version>1.6.0</version>
+			<scope>provided</scope>
 		</dependency>
 
 

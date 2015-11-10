@@ -6,7 +6,7 @@ TODO
 	* add risk index	(done)
 * complains front-end interface
 * improve risk formula
-* complete apestan.com crawler and refactor ir as flume sources
+* complete apestan.com crawler and refactor ir as flume sources 	(done)
 * implement risk index calculation using complains and crawlers' data
 	* define storage impl
 	* update risk index after calculation via admin endpoint 

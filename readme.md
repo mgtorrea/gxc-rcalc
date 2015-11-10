@@ -11,6 +11,7 @@ The project is divided into smaller specific-purpose submodules:
 
 *	rest: spring-boot RESTful endpoints to expose risk index values.
 *	webapp: front-end components to generate a cool visualization (css,js,html)
+*	crawlers: apache flume plugin with custom crawlers and configuration to start flume agents using them to collect data
 
 rest (building)
 ======
@@ -46,3 +47,25 @@ $ heroku open
 ````
 
 A new page will be loaded in your web browser, then append '/index' to the url in the navigation bar, for instance: https://frozen-plateau-1742.herokuapp.com/index
+
+
+crawlers
+======
+
+This submodule contains custom components (web crawlers) encapsulated as a flume plugin used to collect data from sites regarding companies. This data is then used to calculate a riskIndex for each company.
+To build the plugin and start crawling data, [apache flume](https://flume.apache.org/download.html) must be installed and the following env variables correctly set:
+````
+FLUME_HOME=/path/to/flume/
+PATH=$PATH:$FLUME_HOME/bin
+````
+
+Then build the plugin and install it using the provided script:
+````
+$ sh build-plugin.sh
+````
+
+Now you can start crawling data by starting the configured agents. Note that configuration files are located inside **crawlers/conf** directory:
+````
+$ sh start-agent.sh
+````
+

@@ -20,6 +20,9 @@ import org.apache.flume.source.AbstractSource;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
@@ -30,6 +33,8 @@ import com.google.gson.Gson;
  *
  */
 public class ApestanCrawlerSource extends AbstractSource implements Configurable, PollableSource {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ApestanCrawlerSource.class);
 	
 	public static final String COMPANIES_URL = 
 			"https://www.apestan.com/lista-completa-de-companias.html/period_year";
@@ -49,7 +54,10 @@ public class ApestanCrawlerSource extends AbstractSource implements Configurable
 		try {
 			doc = Jsoup.connect(COMPANIES_URL).userAgent("Mozilla").get();
 			// Extract company elements
-			this.companies = doc.select("div#content ul.userList li").iterator();
+			Elements elements = doc.select("div#content ul.userList li");
+			LOGGER.debug("Found {} companies to crawl", elements.size());
+			
+			this.companies = elements.iterator();
 			
 		} catch (IOException e) {
 			throw new FlumeException("Could not retrieve Companies list",e);
@@ -58,13 +66,17 @@ public class ApestanCrawlerSource extends AbstractSource implements Configurable
 	
 	@Override
 	public void stop() {
-		
+		// add other stuff if necessary
+		super.stop();
 	}
 
 	@Override
 	public Status process() throws EventDeliveryException {
 		if(!companies.hasNext()) {
-			stop(); // is manual stop valid ?
+			// TODO: maybe add a more deep crawling to get entire apestan.com catalog
+			// or trigger execution after a configurable delay 
+			// or just stop agent
+		
 			return Status.BACKOFF;
 		}
 		
@@ -102,8 +114,8 @@ public class ApestanCrawlerSource extends AbstractSource implements Configurable
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("companyName", companyName);
-		map.put("complainCount", ratings.size());
-		map.put("ratings", ratings);
+		map.put("complainsCount", ratings.size());
+		map.put("complainsRatings", ratings);
 		
 		return map;
 	}
