@@ -11,23 +11,20 @@ if [ -z ${FLUME_HOME+x} ]; then
 else 
 	echo "FLUME_HOME=$FLUME_HOME"
 	FLUME_PLUGINS="$FLUME_HOME/plugins.d"
-	mkdir $FLUME_PLUGINS
 fi
 
+buildPlugin() {
+	mvn clean package
+}
 
 installPlugin() {
 	echo "Installing flume plugin $(ls target/*.gz) to target directory: $FLUME_PLUGINS"
+	mkdir $FLUME_PLUGINS
 	cp "$(ls target/*.gz)" $FLUME_PLUGINS && \
 	tar -xzvf "$(ls $FLUME_PLUGINS/*.gz)" -C $FLUME_PLUGINS && \
 	rm "$(ls $FLUME_PLUGINS/*.gz)"
 }
 
-cd $CWD
-if ls target/*.gz 1> /dev/null 2>&1; then
-	installPlugin
-else
-	echo "Building flume plugin"
-	mvn clean package && \
-	installPlugin
-fi
-
+cd $CWD && \
+buildPlugin && \
+installPlugin

@@ -54,10 +54,10 @@ public class ApestanCrawlerSource extends AbstractSource implements Configurable
 		try {
 			doc = Jsoup.connect(COMPANIES_URL).userAgent("Mozilla").get();
 			// Extract company elements
-			Elements elements = doc.select("div#content ul.userList li");
-			LOGGER.debug("Found {} companies to crawl", elements.size());
-			
+			Elements elements = doc.select("div#content ul.userList li");			
 			this.companies = elements.iterator();
+			
+			LOGGER.debug("Found {} Companies to crawl", elements.size());
 			
 		} catch (IOException e) {
 			throw new FlumeException("Could not retrieve Companies list",e);
@@ -76,6 +76,8 @@ public class ApestanCrawlerSource extends AbstractSource implements Configurable
 			// TODO: maybe add a more deep crawling to get entire apestan.com catalog
 			// or trigger execution after a configurable delay 
 			// or just stop agent
+			
+			LOGGER.debug("No more companies to crawl, backing off...");
 		
 			return Status.BACKOFF;
 		}
