@@ -21,45 +21,41 @@
     <div id="gxc-loader"></div>
     <ion-side-menus>
         <!-- Center content -->
-        <ion-side-menu-content drag-content="false">
-            <!--<ion-header-bar style="bakcground-color:blue;" align-title="left">
-                
-            </ion-header-bar>-->
-            <ion-pane>
-                <div id="calc_principal" ng-controller="RiskCalculatorController">
-                    <div class="gxc-calc-header">
-                        <button class="button button-icon ion-navicon btn-menu" menu-toggle="left" style="top: 4px;"> </button>
-                        <div class="calc-res-costo">
-                            <span class="content" style="margin-left: 15px;"></span>
-                            <div class="label">Costo calculado</div>
-                        </div>
-                        <button class="button button-icon ion-ios-information-outline btn-menu" style="float: right; right: 0;top: 6px;font-size: 25pt;" ng-if="resultado>0" ng-click="muestraDetalleCalculo()"> </button>
-                        <div class="calc-nombre-empresa" ng-click="configuraEmpresa();">
-                            <div ng-if="data.empresaSeleccionada == ''">Seleccione una empresa</div>
-                            <div ng-if="data.empresaSeleccionada.name != ''">Empresa: {{data.empresaSeleccionada.name}}</div>
-                        </div>
+        <ion-side-menu-content drag-content="false" ng-controller="RiskCalculatorController">
+            <ion-header-bar class="main-bar" style="padding: 0;">
+                <div class="gxc-calc-header">
+                    <button class="button button-icon ion-navicon btn-menu" menu-toggle="left" style="top: 4px;"> </button>
+                    <div class="calc-res-costo">
+                        <span class="content" style="margin-left: 15px;"></span>
+                        <div class="label">Costo calculado</div>
                     </div>
-                    <div style="bottom:0;top: 116px;left:0;right:0;position:fixed;background-color:black;z-index:1;opacity:0.5;" ng-if="data.empresaSeleccionada == ''"></div>
-                    <ion-content class="hxc-list-calc{{blurredClass}}">
-                        <ion-list>
-                            <ion-item class="item-divider">Informaci&oacute;n seleccionada</ion-item>
-                            <ion-item class="item-icon-left item-icon-right item-checkbox" ng-repeat="item in items_seleccionados">
-                                <label class="checkbox">
-                                    <input type="checkbox" ng-model="item.checked" ng-checked="item.checked" ng-click="clickItem(item);">
-                                </label>
-                                {{item.name}}<span class="badge badge-{{item.cat}}">{{item.badge}}</span>
-                            </ion-item>
-                            <ion-item class="item-divider">Otra informaci&oacute;n</ion-item>
-                            <ion-item class="item-icon-left item-icon-right item-checkbox" ng-repeat="item in items">
-                                <label class="checkbox">
-                                    <input type="checkbox" ng-model="item.checked" ng-checked="item.checked" ng-click="clickItem(item);">
-                                </label>
-                                {{item.name}}<span class="badge badge-{{item.cat}}">{{item.badge}}</span>
-                            </ion-item>
-                        </ion-list>
-                    </ion-content>
+                    <button class="button button-icon ion-ios-information-outline btn-menu" style="float: right; right: 0;top: 6px;font-size: 25pt;" ng-if="resultado>0" ng-click="muestraDetalleCalculo()"> </button>
+                    <div class="calc-nombre-empresa" ng-click="configuraEmpresa();">
+                        <div ng-if="data.empresaSeleccionada == ''">Seleccione una empresa</div>
+                        <div ng-if="data.empresaSeleccionada != ''">Empresa: {{data.empresaSeleccionada.name}}</div>
+                    </div>
                 </div>
-
+            </ion-header-bar>
+            <ion-pane style="background-color: #005500;" id="calc_principal">
+                <ion-content>
+                    <div style="height:100%;width:100%;position:fixed;background-color:black;z-index:3;opacity:0.5;" ng-if="data.empresaSeleccionada == ''"></div>
+                    <ion-list class="hxc-list-calc{{blurredClass}}">
+                        <ion-item class="item-divider">Informaci&oacute;n seleccionada</ion-item>
+                        <ion-item class="item-icon-left item-icon-right item-checkbox" ng-repeat="item in items_seleccionados">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="item.checked" ng-checked="item.checked" ng-click="clickItem(item);">
+                            </label>
+                            {{item.name}}<span class="badge badge-{{item.cat}}">{{item.badge}}</span>
+                        </ion-item>
+                        <ion-item class="item-divider">Otra informaci&oacute;n</ion-item>
+                        <ion-item class="item-icon-left item-icon-right item-checkbox" ng-repeat="item in items">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="item.checked" ng-checked="item.checked" ng-click="clickItem(item);">
+                            </label>
+                            {{item.name}}<span class="badge badge-{{item.cat}}">{{item.badge}}</span>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
             </ion-pane>
         </ion-side-menu-content>
         <ion-side-menu side="left" class="gxc-menu" style="overflow-y: auto;" ng-controller="MenuController">
@@ -81,8 +77,37 @@
             <h1 class="title">Ayuda</h1>
             <button class="button button-clear icon ion-close-round" ng-click="closeModal();"></button>
         </ion-header-bar>
-        <ion-content>
-            Help content!
+        <ion-content style="top: 45px;">
+            <div class="card">
+                <div class="item item-divider">
+                    Seleccione una empresa
+                </div>
+                <div class="item item-text-wrap">
+                    Seleccione una empresa presionando sobre el texto.
+                    <br/> En el listado, presione sobre la empresa que le solicita informaci&oacute;n. Utilice el cuadro de b&uacute;squeda para filtrar las empresas.
+                </div>
+            </div>
+            <div class="card">
+                <div class="item item-divider">
+                    Seleccione conceptos de informaci&oacute;n
+                </div>
+                <div class="item item-text-wrap">
+                    Seleccione la informaci&oacute;n que le solicitan.
+                    <br/>Observe que el "Costo calculado" aumenta conforme selecciona nuevos conceptos.
+                    <br/>
+                    <br/> Los conceptos tienen un indicador a su derecha; &eacute;ste indica que tan cr&iacute;tico es y que tanto puede aumentar el "Costo calculado".
+                </div>
+            </div>
+            <div class="card">
+                <div class="item item-divider">
+                    Sobre el costo calculado
+                </div>
+                <div class="item item-text-wrap">
+                    El detalle del costo calculado puede consultarse al presionar en el &iacute;cono a su derecha.
+                    <br/>Este valor se calcula en base a la formula ah&iacute; se&ntilde;alada.<br/>
+                    <br/>El resultado muestra una aproximaci&oacute;n a cuanto puede valer la informaci&oacute;n proporcionada en el mercado negro.<br/><br/>Te recomendamos que cuides tu informaci&oacute;n, pues es dinero en efectivo.
+                </div>
+            </div>
         </ion-content>
     </ion-modal-view>
 </script>
@@ -92,7 +117,7 @@
             <h1 class="title">Sobre la aplicaci&oacute;n</h1>
             <button class="button button-clear icon ion-close-round" ng-click="closeModal();"></button>
         </ion-header-bar>
-        <ion-content style="text-align:center;">
+        <ion-content style="text-align:center;top: 45px;">
             <img src="img/icono-app.png" style="margin-top: 30px;width: 35%;" />
             <h3>Calculadora de riesgo</h3>
             <h4 style="color:#0088aa;">&iquest;Cu&aacute;nto vale tu informaci&oacute;n?</h4> v1.0
@@ -137,7 +162,7 @@
 <script id="modal-detalle-calculo.html" type="text/ng-template">
     <ion-modal-view>
         <ion-header-bar class="gxc-header" style="height: 80px;padding-top:16px;">
-            <span style="margin-left: 16px;">Al an&aacute;lisis de la informaci&oacute;n que seleccionaste, arroj&oacute; el siguiente resultado:</span>
+            <span style="margin-left: 16px;">El an&aacute;lisis de la informaci&oacute;n que seleccionaste, arroj&oacute; el siguiente resultado:</span>
             <button class="button button-outline icon ion-close-round" ng-click="closeModal();"></button>
         </ion-header-bar>
         <ion-content style="text-align:center;top: 80px;">
@@ -151,7 +176,15 @@
                     Informaci&oacute;n proporcionada
                 </div>
                 <div class="item item-text-wrap">
-                    La informaci&oacute;n cr&iacute;tica que proporcionaste fue: .....
+                    <span style="font-weight:bold;" ng-if="conteos.num_std>0">Nivel est&aacute;ndar ({{conteos.num_std}})</span>
+                    <br/>
+                    <span ng-repeat="item in items_seleccionados | filtroCategoria:'std'">{{item.name}}<br/></span>
+                    <span style="font-weight:bold;" ng-if="conteos.num_stv>0">Nivel sensible ({{conteos.num_stv}})</span>
+                    <br/>
+                    <span ng-repeat="item in items_seleccionados | filtroCategoria:'stv'">{{item.name}}<br/></span>
+                    <span style="font-weight:bold;" ng-if="conteos.num_spc>0">Nivel especial ({{conteos.num_spc}})</span>
+                    <br/>
+                    <span ng-repeat="item in items_seleccionados | filtroCategoria:'spc'">{{item.name}}<br/></span>
                 </div>
             </div>
 
@@ -163,6 +196,15 @@
                     La f&oacute;rmula utilizada para el c&aacute;lculo, es la siguiente:
                     <div id="formula" style="width:100%;height:80px;"></div>
                     Para el caso calculado, se tienen los siguientes valores:
+                    <br/> E=1
+                    <br/> S=2
+                    <br/> P=3
+                    <br/> a={{conteos.num_std}}
+                    <br/> b={{conteos.num_stv}}
+                    <br/> c={{conteos.num_spc}}
+                    <br/> EP={{EP}}
+                    <br/> UM={{UM}}
+                    <br/>
                 </div>
             </div>
         </ion-content>

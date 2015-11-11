@@ -54,6 +54,7 @@ body * {
     margin-top: 0;
     color: white;
     padding: 0;
+    width: 100%;
 }
 .btn-menu {
     float: left;
@@ -61,8 +62,14 @@ body * {
     color: white;
     font-size: 20pt;
 }
+.has-header {
+  top: 116px;
+}
+.bar-header.main-bar {
+  height: 116px;
+}
 .hxc-list-calc {
-    top: 117px;
+    
     background-color: #005500;
 }
 .calc-res-costo,

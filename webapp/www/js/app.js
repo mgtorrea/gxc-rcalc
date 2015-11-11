@@ -21,7 +21,7 @@ for (var i = 0; i < categorias.estandar.length; i++) {
     cat_proc.push({
         name: categorias.estandar[i],
         cat: 'std',
-        badge:'$',
+        badge: '$',
         checked: false
     });
 }
@@ -29,7 +29,7 @@ for (var i = 0; i < categorias.sensible.length; i++) {
     cat_proc.push({
         name: categorias.sensible[i],
         cat: 'stv',
-        badge:'$$',
+        badge: '$$',
         checked: false
     });
 }
@@ -37,7 +37,7 @@ for (var i = 0; i < categorias.especial.length; i++) {
     cat_proc.push({
         name: categorias.especial[i],
         cat: 'spc',
-        badge:'$$$',
+        badge: '$$$',
         checked: false
     });
 }
@@ -70,7 +70,9 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
     $scope.resultado = 0;
     $scope.items_seleccionados = [];
     $scope.empresas = empresas;
-    $scope.blurredClass = " blurred"
+    $scope.blurredClass = " blurred";
+    $scope.EP = EP__PRINCIPIOS_USUARIO;
+    $scope.UM = UM__UNIDAD_MONETARIA_SIGNIFICATIVA;
 
     $scope.clickItem = function (item) {
         if (item.checked) {
@@ -95,7 +97,7 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
             scope: $scope,
             animation: 'slide-in-up'
         }).then(function (modal) {
-            $scope.filtro.nombre="";
+            $scope.filtro.nombre = "";
             $scope.busca();
             $scope.modal = modal;
             $scope.modal.show();
@@ -105,15 +107,18 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
             $scope.modal.remove();
         };
     }
-    
+
     $scope.muestraDetalleCalculo = function () {
         $ionicModal.fromTemplateUrl('modal-detalle-calculo.html', {
             scope: $scope,
             animation: 'slide-in-up'
         }).then(function (modal) {
             $scope.modal = modal;
-            $scope.modal.show().then(function(){
-                katex.render("V \\approx \\frac{\\sum_{i=1}^{a}{E_i}+\\sum_{j=1}^{b}{S_j}+\\sum_{k=1}^{c}{P_k}}{a+b+c}*EP*UM", document.querySelector("#formula"), { displayMode: true });
+            $scope.modal.show().then(function () {
+                katex.render("V \\approx \\frac{\\sum\\limits_{i=1}^{a}{Ei}+\\sum\\limits_{j=1}^{b}{Sj}+\\sum\\limits_{k=1}^{c}{Pk}}{a+b+c}*EP*UM", document.querySelector("#formula"), {
+                    displayMode: true
+                });
+
             });
         });
         $scope.closeModal = function () {
@@ -125,17 +130,19 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
     $scope.filtro = {
         nombre: ''
     };
-    $scope.data={empresaSeleccionada:""};
+    $scope.data = {
+        empresaSeleccionada: ""
+    };
 
     $scope.busca = function () {
         EmpresasService.consulta($scope.filtro.nombre).then(function (res) {
-            $scope.empresas=res;
+            $scope.empresas = res;
         });
     }
-    
-    $scope.seleccionaEmpresa=function(empresa){
-        $scope.data.empresaSeleccionada=empresa;
-        $scope.blurredClass="";
+
+    $scope.seleccionaEmpresa = function (empresa) {
+        $scope.data.empresaSeleccionada = empresa;
+        $scope.blurredClass = "";
         //$scope.busca();
         $scope.closeModal();
     }
@@ -165,13 +172,26 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
         if (s_p == 0) {
             return 0;
         }
-        var suma_pesos = ($scope.conteos.num_std * CTE_PESO_ESTANDAR) + ($scope.conteos.num_stv * CTE_PESO_SENSIBLE) + ($scope.conteos.num_spc * CTE_PESO_ESPECIAL);
-        suma_pesos = suma_pesos / s_p;
-        return suma_pesos * EP__PRINCIPIOS_USUARIO * UM__UNIDAD_MONETARIA_SIGNIFICATIVA;
+        var suma_pesos = ($scope.conteos.num_std * ($scope.conteos.num_std + 1) * CTE_PESO_ESTANDAR) + ($scope.conteos.num_stv * ($scope.conteos.num_stv + 1) * CTE_PESO_SENSIBLE) + ($scope.conteos.num_spc * ($scope.conteos.num_spc + 1) * CTE_PESO_ESPECIAL);
+        suma_pesos = suma_pesos / (2 * s_p);
+        return suma_pesos * $scope.EP * $scope.UM;
     }
 
 });
 
+app.filter('filtroCategoria', function () {
+    return function (items, cat) {
+        var filtered = [];
+
+        angular.forEach(items, function (item) {
+            if (cat === item.cat) {
+                filtered.push(item);
+            }
+        });
+
+        return filtered;
+    }
+});
 
 app.controller('MenuController', function ($scope, $ionicModal) {
     $scope.muestraAyuda = function () {
