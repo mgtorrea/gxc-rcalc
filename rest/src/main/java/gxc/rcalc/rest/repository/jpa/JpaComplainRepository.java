@@ -21,7 +21,7 @@ public class JpaComplainRepository implements ComplainRepository {
 
 	@Override
 	public Collection<Complain> findByCompanyName(String name) {
-		return delegate.findByCompanyNameStartingWith(name);
+		return delegate.findByCompanyNameStartingWithIgnoreCase(name);
 	}
 
 }

@@ -15,7 +15,7 @@ public interface JpaRiskIndexRepositoryDelegate extends CrudRepository<RiskIndex
 	RiskIndex findById(Long id);
 	
 	@Transactional(readOnly = true)
-	List<RiskIndex> findLatestByCompanyNameStartingWith(String name);
+	List<RiskIndex> findLatestByCompanyNameStartingWithIgnoreCase(String name);
 	
 	@Transactional(readOnly = true)
 	List<RiskIndex> findAll();

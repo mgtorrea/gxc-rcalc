@@ -32,7 +32,7 @@ public class JpaCompanyRepository implements CompanyRepository {
 
 	@Override
 	public Collection<Company> findByName(String name) {
-		return delegate.findByNameStartingWith(name);
+		return delegate.findByNameStartingWithIgnoreCase(name);
 	}
 
 }

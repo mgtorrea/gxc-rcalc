@@ -15,7 +15,7 @@ public interface JpaCompanyRepositoryDelegate extends CrudRepository<Company,Lon
 	Company findById(Long id);
 	
 	@Transactional(readOnly = true)
-	List<Company> findByNameStartingWith(String name);
+	List<Company> findByNameStartingWithIgnoreCase(String name);
 	
 	@Transactional(readOnly = true)
 	List<Company> findAll();

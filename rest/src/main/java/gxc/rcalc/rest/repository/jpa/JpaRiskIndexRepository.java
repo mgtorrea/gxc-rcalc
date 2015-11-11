@@ -28,7 +28,7 @@ public class JpaRiskIndexRepository implements RiskIndexRepository {
 
 	@Override
 	public Collection<RiskIndex> findByCompanyName(String companyName) {
-		return latestByCompany(delegate.findLatestByCompanyNameStartingWith(companyName));
+		return latestByCompany(delegate.findLatestByCompanyNameStartingWithIgnoreCase(companyName));
 	}
 
 	@Override

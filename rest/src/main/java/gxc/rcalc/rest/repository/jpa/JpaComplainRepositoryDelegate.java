@@ -12,6 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface JpaComplainRepositoryDelegate extends CrudRepository<Complain,Long> {
 	
 	@Transactional(readOnly = true)
-	List<Complain> findByCompanyNameStartingWith(String name);
+	List<Complain> findByCompanyNameStartingWithIgnoreCase(String name);
 	
 }
