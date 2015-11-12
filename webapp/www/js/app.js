@@ -1,4 +1,4 @@
-var app = angular.module('gxc-rcalc', ['ionic']);
+var app = angular.module('gxc-rcalc', ['ionic', 'ionic.rating']);
 
 var CTE_PESO_ESTANDAR = 1,
     CTE_PESO_SENSIBLE = 2,
@@ -107,6 +107,27 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
             $scope.modal.remove();
         };
     }
+
+    $scope.muestraTestConfianza = function () {
+        $scope.modal.hide();
+        $scope.modal.remove().then(function () {
+            $ionicModal.fromTemplateUrl('modal-test-confianza.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal = modal;
+                $scope.modal.show();
+            });
+            $scope.closeModal = function () {
+                $scope.modal.hide();
+                $scope.modal.remove();
+            };
+        });
+    }
+
+    $scope.testConfianza = {
+        c1: {rate:0,max:5}
+    };
 
     $scope.muestraDetalleCalculo = function () {
         $ionicModal.fromTemplateUrl('modal-detalle-calculo.html', {

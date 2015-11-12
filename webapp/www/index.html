@@ -10,11 +10,13 @@
     <link rel="stylesheet" type="text/css" href="css/fonts.css">
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <link rel="stylesheet" type="text/css" href="css/odometer-theme-minimal.css" />
+    <link rel="stylesheet" type="text/css" href="css/ionic-rating.css" />
     <script type="text/javascript" src="js/ionic.bundle.min.js"></script>
     <script type="text/javascript" src="js/odometer.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/EmpresasService.js"></script>
     <script src="katex/katex.min.js"></script>
+    <script src="js/ionic-rating.min.js"></script>
 </head>
 
 <body ng-app="gxc-rcalc">
@@ -78,18 +80,16 @@
             <button class="button button-clear icon ion-close-round" ng-click="closeModal();"></button>
         </ion-header-bar>
         <ion-content style="top: 45px;">
-            <div class="card">
+            <div class="list list-inset">
                 <div class="item item-divider">
-                    Seleccione una empresa
+                    1. Seleccione una empresa
                 </div>
                 <div class="item item-text-wrap">
                     Seleccione una empresa presionando sobre el texto.
                     <br/> En el listado, presione sobre la empresa que le solicita informaci&oacute;n. Utilice el cuadro de b&uacute;squeda para filtrar las empresas.
                 </div>
-            </div>
-            <div class="card">
                 <div class="item item-divider">
-                    Seleccione conceptos de informaci&oacute;n
+                    2. Seleccione conceptos de informaci&oacute;n
                 </div>
                 <div class="item item-text-wrap">
                     Seleccione la informaci&oacute;n que le solicitan.
@@ -97,15 +97,16 @@
                     <br/>
                     <br/> Los conceptos tienen un indicador a su derecha; &eacute;ste indica que tan cr&iacute;tico es y que tanto puede aumentar el "Costo calculado".
                 </div>
-            </div>
-            <div class="card">
                 <div class="item item-divider">
-                    Sobre el costo calculado
+                    3. Sobre el costo calculado
                 </div>
                 <div class="item item-text-wrap">
                     El detalle del costo calculado puede consultarse al presionar en el &iacute;cono a su derecha.
-                    <br/>Este valor se calcula en base a la formula ah&iacute; se&ntilde;alada.<br/>
-                    <br/>El resultado muestra una aproximaci&oacute;n a cuanto puede valer la informaci&oacute;n proporcionada en el mercado negro.<br/><br/>Te recomendamos que cuides tu informaci&oacute;n, pues es dinero en efectivo.
+                    <br/>Este valor se calcula en base a la formula ah&iacute; se&ntilde;alada.
+                    <br/>
+                    <br/>El resultado muestra una aproximaci&oacute;n a cuanto puede valer la informaci&oacute;n proporcionada en el mercado negro.
+                    <br/>
+                    <br/>Te recomendamos que cuides tu informaci&oacute;n, pues es dinero en efectivo.
                 </div>
             </div>
         </ion-content>
@@ -155,7 +156,50 @@
             </ion-list>
         </ion-content>
         <ion-footer-bar>
-            <button class="button pull-right button-outline button-footer">Encuesta</button>
+            <button class="button pull-right button-outline button-footer" ng-click="muestraTestConfianza()">Encuesta</button>
+        </ion-footer-bar>
+    </ion-modal-view>
+</script>
+<script id="modal-test-confianza.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="gxc-header">
+            Test de confianza
+            <button class="button button-clear icon ion-close-round" ng-click="closeModal();"></button>
+        </ion-header-bar>
+        <ion-content>
+            <div class="list list-inset">
+                <div class="item item-divider">
+                    Transparencia
+                </div>
+                <div class="item item-text-wrap">
+                    ¿Qu&eacute; tanto considera que el responsable es claro respecto al tratamiento que dar&aacute; a sus datos personales?
+                    <rating ng-model="testConfianza.c1.rate" max="testConfianza.c1.max"></rating>
+                </div>
+                <div class="item item-divider">
+                    Confianza
+                </div>
+                <div class="item item-text-wrap">
+                    ¿Al proporcionar su informaci&oacute;n personal para recibir un producto o servicio, que tanta confianza le inspira el responsable?
+                    <rating ng-model="testConfianza.c1.rate" max="testConfianza.c1.max"></rating>
+                </div>
+                <div class="item item-divider">
+                    Control
+                </div>
+                <div class="item item-text-wrap">
+                    ¿Qu&eacute; tanto siente que el responsable le proporciona mecanismos suficientes para acceder, rectificar, cancelar u oponerse al tratamiento de la informaci&oacute;n personal que le proporcion&oacute;?
+                    <rating ng-model="testConfianza.c1.rate" max="testConfianza.c1.max"></rating>
+                </div>
+                <div class="item item-divider">
+                    Valoraci&oacute;n
+                </div>
+                <div class="item item-text-wrap">
+                    ¿Qu&eacute; tanto percibe que los datos personales que proporcion&oacute; tienen un valor adicional para el responsable, de modo que puedan ser explotados posteriormente?
+                    <rating ng-model="testConfianza.c1.rate" max="testConfianza.c1.max"></rating>
+                </div>
+            </div>
+        </ion-content>
+        <ion-footer-bar>
+            <button class="button pull-right button-outline button-footer">Finalizar</button>
         </ion-footer-bar>
     </ion-modal-view>
 </script>
