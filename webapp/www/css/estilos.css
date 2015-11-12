@@ -9,6 +9,10 @@ body * {
     height: 100%;
     background-color: #3E8059;
     z-index: 10;
+    background-image: url('../img/icon-monochrome.png');
+    background-size: 92px;
+    background-repeat: no-repeat;
+    background-position: 50%;
 }
 .gxc-header,
 .bar-footer {
@@ -63,13 +67,12 @@ body * {
     font-size: 20pt;
 }
 .has-header {
-  top: 116px;
+    top: 116px;
 }
 .bar-header.main-bar {
-  height: 116px;
+    height: 116px;
 }
 .hxc-list-calc {
-    
     background-color: #005500;
 }
 .calc-res-costo,
@@ -149,8 +152,7 @@ span.odometer-digit:first-child::before {
     color: white;
     border-color: white;
 }
-
-.blurred *{
+.blurred * {
     -webkit-filter: blur(2px);
     -moz-filter: blur(2px);
     -o-filter: blur(2px);

@@ -67,8 +67,10 @@
                 <br/><span style="font-style: italic;">&quot;&iquest;Cu&aacute;nto vale tu informaci&oacute;n?&quot;</span>
             </div>
             <ion-list>
+                <ion-item class="item-icon-left" ng-click="muestraNewsfeed();"><i class="icon ion-document-text"></i>Noticias</ion-item>
                 <ion-item class="item-icon-left" ng-click="muestraAyuda();"><i class="icon ion-help-circled"></i>Ayuda</ion-item>
                 <ion-item class="item-icon-left" ng-click="muestraAcercaDe();"><i class="icon ion-chatbubble-working"></i>Sobre la aplicaci&oacute;n</ion-item>
+            </ion-list>
             </ion-list>
         </ion-side-menu>
     </ion-side-menus>
@@ -139,10 +141,47 @@
         </ion-content>
     </ion-modal-view>
 </script>
+<script id="modal-newsfeed.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="gxc-header">
+            <h1 class="title">Noticias</h1>
+            <button class="button button-clear icon ion-close-round" ng-click="closeModal();"></button>
+        </ion-header-bar>
+        <ion-content style="text-align:center;top: 45px;">
+            <div class="card">
+                <div class="item item-text-wrap">
+                    <h3>Reprueba estudio protección de datos de gigantes de Internet</h3>
+                    <p>
+                        La Jornada en linea 03/11/2015
+                        <br/> Las principales empresas de telecomunicaciones y de internet no hacen lo suficiente para proteger la privacidad, los datos y la libertad de ... <a href="">Leer m&aacute;s</a></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="item item-text-wrap">
+                    <h3>México prioriza privacidad y seguridad en el ámbito tecnológico</h3>
+                    <p>
+                        CIOAL 09/11/2015
+                        <br/> En México, la privacidad y datos de las personas empresariales y ... y por la Ley Federal de Protección de Datos Personales en Posesión de ... <a href="">Leer m&aacute;s</a></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="item item-text-wrap">
+                    <h3>Tweet de @INAIMexico</h3>
+                    <p>
+                        Nov 10
+                        <br/> ¿Tus hijos navegan en internet? Enséñalos a cuidarse. Participen en el Concurso de Dibujo: <a href="">http://bit.ly/1PHDkwt</a> </p>
+                </div>
+            </div>
+        </ion-content>
+        <ion-footer-bar>
+            <button class="button pull-right button-outline button-footer" ng-click="muestraTestConfianza()">Encuesta</button>
+        </ion-footer-bar>
+    </ion-modal-view>
+</script>
 <script id="modal-empresa.html" type="text/ng-template">
     <ion-modal-view>
         <ion-header-bar class="gxc-header" style="height: 80px;padding-top:16px;">
-            <span style="margin-left: 16px;">Seleccione la empresa a quien le proporcionar&aacute; su informaci&oacute;n o conteste la encuesta para calificarla.</span>
+            <span style="margin-left: 16px;">Seleccione la empresa a quien le proporcionar&aacute; su informaci&oacute;n. Si no encuentra la empresa, responda el <em>test</em>.</span>
             <button class="button button-clear icon ion-close-round" ng-click="closeModal();"></button>
         </ion-header-bar>
         <ion-content style="text-align:center;top: 80px;background-color:#3E8059;">
@@ -156,50 +195,63 @@
             </ion-list>
         </ion-content>
         <ion-footer-bar>
-            <button class="button pull-right button-outline button-footer" ng-click="muestraTestConfianza()">Encuesta</button>
+            <button class="button pull-right button-outline button-footer" ng-click="muestraTestConfianza()">Test de confianza</button>
         </ion-footer-bar>
     </ion-modal-view>
 </script>
 <script id="modal-test-confianza.html" type="text/ng-template">
     <ion-modal-view>
         <ion-header-bar class="gxc-header">
-            Test de confianza
+            <h1 class="title">Test de confianza</h1>
             <button class="button button-clear icon ion-close-round" ng-click="closeModal();"></button>
         </ion-header-bar>
-        <ion-content>
+        <ion-content style="top: 45px;">
             <div class="list list-inset">
                 <div class="item item-divider">
                     Transparencia
                 </div>
                 <div class="item item-text-wrap">
-                    ¿Qu&eacute; tanto considera que el responsable es claro respecto al tratamiento que dar&aacute; a sus datos personales?
-                    <rating ng-model="testConfianza.c1.rate" max="testConfianza.c1.max"></rating>
+                    ¿Considera que el responsable es claro respecto al tratamiento que dar&aacute; a sus datos personales?
+                    <br/>
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="testConfianza.transparencia">
+                    </label>
                 </div>
                 <div class="item item-divider">
                     Confianza
                 </div>
                 <div class="item item-text-wrap">
-                    ¿Al proporcionar su informaci&oacute;n personal para recibir un producto o servicio, que tanta confianza le inspira el responsable?
-                    <rating ng-model="testConfianza.c1.rate" max="testConfianza.c1.max"></rating>
+                    ¿Al proporcionar su informaci&oacute;n personal para recibir un producto o servicio, le inspira confianza el responsable?
+                    <br/>
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="testConfianza.confianza">
+                    </label>
+                    <!--                    <rating ng-model="testConfianza.c1.rate" max="testConfianza.c1.max"></rating>-->
                 </div>
                 <div class="item item-divider">
                     Control
                 </div>
                 <div class="item item-text-wrap">
-                    ¿Qu&eacute; tanto siente que el responsable le proporciona mecanismos suficientes para acceder, rectificar, cancelar u oponerse al tratamiento de la informaci&oacute;n personal que le proporcion&oacute;?
-                    <rating ng-model="testConfianza.c1.rate" max="testConfianza.c1.max"></rating>
+                    ¿Siente que el responsable le proporciona mecanismos suficientes para acceder, rectificar, cancelar u oponerse al tratamiento de la informaci&oacute;n personal que le proporcion&oacute;?
+                    <br/>
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="testConfianza.control">
+                    </label>
                 </div>
                 <div class="item item-divider">
                     Valoraci&oacute;n
                 </div>
                 <div class="item item-text-wrap">
-                    ¿Qu&eacute; tanto percibe que los datos personales que proporcion&oacute; tienen un valor adicional para el responsable, de modo que puedan ser explotados posteriormente?
-                    <rating ng-model="testConfianza.c1.rate" max="testConfianza.c1.max"></rating>
+                    ¿Percibe que los datos personales que proporcion&oacute; tienen un valor adicional para el responsable, de modo que puedan ser explotados posteriormente?
+                    <br/>
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="testConfianza.valoracion">
+                    </label>
                 </div>
             </div>
         </ion-content>
         <ion-footer-bar>
-            <button class="button pull-right button-outline button-footer">Finalizar</button>
+            <button class="button pull-right button-outline button-footer" ng-click="evaluaTestConfianza()">Finalizar</button>
         </ion-footer-bar>
     </ion-modal-view>
 </script>

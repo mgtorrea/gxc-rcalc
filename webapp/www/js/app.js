@@ -90,8 +90,8 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
         });
         $scope.actualizaCalculo();
     }
-    
-    $scope.actualizaCalculo=function(){
+
+    $scope.actualizaCalculo = function () {
         $scope.resultado = $scope.recalcula();
         od.update($scope.resultado);
     }
@@ -130,8 +130,36 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
     }
 
     $scope.testConfianza = {
-        c1: {rate:0,max:5}
+        c1: {
+            rate: 0,
+            max: 5
+        },
+        transparencia: false,
+        confianza: false,
+        control: false,
+        valoracion: false
     };
+
+    $scope.evaluaTestConfianza = function () {
+        console.log($scope.testConfianza);
+        var num_no = 0;
+        if ($scope.testConfianza.transparencia)
+            num_no++;
+        if ($scope.testConfianza.confianza)
+            num_no++;
+        if ($scope.testConfianza.control)
+            num_no++;
+        if ($scope.testConfianza.valoracion)
+            num_no++;
+        $scope.EP = num_no+1;
+        $scope.data.empresaSeleccionada = {
+            "companyName": "Personalizada",
+            "riskIndex":$scope.EP
+        };
+        $scope.closeModal();
+        $scope.blurredClass = "";
+        $scope.actualizaCalculo();
+    }
 
     $scope.muestraDetalleCalculo = function () {
         $ionicModal.fromTemplateUrl('modal-detalle-calculo.html', {
@@ -167,7 +195,7 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
 
     $scope.seleccionaEmpresa = function (empresa) {
         $scope.data.empresaSeleccionada = empresa;
-        $scope.EP=empresa.riskIndex;
+        $scope.EP = empresa.riskIndex;
         $scope.blurredClass = "";
         //$scope.busca();
         $scope.actualizaCalculo();
@@ -248,4 +276,19 @@ app.controller('MenuController', function ($scope, $ionicModal) {
             $scope.modal.remove();
         };
     }
+
+    $scope.muestraNewsfeed = function () {
+        $ionicModal.fromTemplateUrl('modal-newsfeed.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modal = modal;
+            $scope.modal.show();
+        });
+        $scope.closeModal = function () {
+            $scope.modal.hide();
+            $scope.modal.remove();
+        };
+    }
+
 });
