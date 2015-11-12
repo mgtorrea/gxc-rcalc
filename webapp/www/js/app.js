@@ -51,7 +51,7 @@ setTimeout(function () {
 }, 1000);
 
 
-app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionicModal, EmpresasService) {
+app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionicModal, $http, EmpresasService) {
 
     var alertPopup = $ionicPopup.alert({
         title: 'Aviso',
