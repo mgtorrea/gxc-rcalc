@@ -1,18 +1,20 @@
-app.factory('EmpresasService', function ($q, $timeout) {
+app.factory('EmpresasService', function ($q, $timeout, $http) {
 
     return {
         empresas_json: null,
 
-        empresas: function() {
-            if(typeof empresas_json === 'undefined') {
-               $http({
-                  method: 'GET',
-                  url: 'http://localhost:8080/index'
+        getEmpresas: function () {
+            var empresas_json = this.empresas_json;
+            var deferred = $q.defer();
+            if (empresas_json === null) {
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/index'
                 }).then(function successCallback(response) {
-                    console.log(response);
                     empresas_json = response.data;
+                    deferred.resolve(estableceBadges(empresas_json));
                 }, function errorCallback(response) {
-                    console.log("Could not get riskIndex list from service: " + response);
+                    console.log(["Could not get riskIndex list from service: " , response]);
 
                     // TODO: add fall safe risk index list
                     empresas_json = [{
@@ -32,33 +34,40 @@ app.factory('EmpresasService', function ($q, $timeout) {
                         "companyName": "bmer",
                         "riskIndex": 3.9
                     }];
+                    deferred.resolve(estableceBadges(empresas_json));
                 });
-            };
-
-            //ESTABLECE BADGES
-            for (var i = 0; i < empresas_json.length; i++) {
-                var emp = empresas_json[i];
-                empresas_json[i].companyName = empresas_json[i].companyName.toUpperCase();
-                if (emp.riskIndex >= 0 && emp.riskIndex <= 2.5) {
-                    empresas_json[i].companyIdx = 'badge-verde';
-                } else {
-                    empresas_json[i].companyIdx = 'badge-rojo';
-                }
+            }else{
+                deferred.resolve(estableceBadges(empresas_json));
             }
 
-            return empresas_json;
+            function estableceBadges(empresas_json) {
+                //ESTABLECE BADGES
+                for (var i = 0; i < empresas_json.length; i++) {
+                    var emp = empresas_json[i];
+                    empresas_json[i].companyName = empresas_json[i].companyName.toUpperCase();
+                    if (emp.riskIndex >= 0 && emp.riskIndex <= 2.5) {
+                        empresas_json[i].companyIdx = 'badge-verde';
+                    } else {
+                        empresas_json[i].companyIdx = 'badge-rojo';
+                    }
+                }
+                return empresas_json;
+            }
+            return deferred.promise;
         },
 
         consulta: function (txt) {
-            var emp = empresas.filter(function (x) {
-                if (x.companyName.toLowerCase().indexOf(txt.toLowerCase()) !== -1)
-                    return true;
-                return false;
-            });
             var deferred = $q.defer();
-            $timeout(function () {
-                deferred.resolve(emp);
-            }, 100);
+            this.getEmpresas().then(function (empresas) {
+                var emp =empresas.filter(function (x) {
+                    if (x.companyName.toLowerCase().indexOf(txt.toLowerCase()) !== -1)
+                        return true;
+                    return false;
+                });
+                $timeout(function () {
+                    deferred.resolve(emp);
+                }, 100);
+            });
             return deferred.promise;
         }
     };

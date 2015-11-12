@@ -69,7 +69,7 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
     $scope.items = cat_proc;
     $scope.resultado = 0;
     $scope.items_seleccionados = [];
-    $scope.empresas = empresas;
+    $scope.empresas = [];
     $scope.blurredClass = " blurred";
     $scope.EP = EP__PRINCIPIOS_USUARIO;
     $scope.UM = UM__UNIDAD_MONETARIA_SIGNIFICATIVA;
@@ -88,6 +88,10 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
         $scope.items_seleccionados.sort(function (a, b) {
             return a.name.localeCompare(b.name)
         });
+        $scope.actualizaCalculo();
+    }
+    
+    $scope.actualizaCalculo=function(){
         $scope.resultado = $scope.recalcula();
         od.update($scope.resultado);
     }
@@ -163,8 +167,10 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
 
     $scope.seleccionaEmpresa = function (empresa) {
         $scope.data.empresaSeleccionada = empresa;
+        $scope.EP=empresa.riskIndex;
         $scope.blurredClass = "";
         //$scope.busca();
+        $scope.actualizaCalculo();
         $scope.closeModal();
     }
 

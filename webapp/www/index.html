@@ -34,7 +34,7 @@
                     <button class="button button-icon ion-ios-information-outline btn-menu" style="float: right; right: 0;top: 6px;font-size: 25pt;" ng-if="resultado>0" ng-click="muestraDetalleCalculo()"> </button>
                     <div class="calc-nombre-empresa" ng-click="configuraEmpresa();">
                         <div ng-if="data.empresaSeleccionada == ''">Seleccione una empresa</div>
-                        <div ng-if="data.empresaSeleccionada != ''">Empresa: {{data.empresaSeleccionada.name}}</div>
+                        <div ng-if="data.empresaSeleccionada != ''">Empresa: {{data.empresaSeleccionada.companyName}}</div>
                     </div>
                 </div>
             </ion-header-bar>
@@ -152,7 +152,7 @@
             </label>
             <ion-list>
                 <ion-item ng-repeat="empresa in empresas" ng-click="seleccionaEmpresa(empresa);">
-                    <span class="badge {{empresa.idx}}">&nbsp;</span> {{empresa.name}}</ion-item>
+                    <span class="badge {{empresa.companyIdx}}">&nbsp;</span> {{empresa.companyName}}</ion-item>
             </ion-list>
         </ion-content>
         <ion-footer-bar>
