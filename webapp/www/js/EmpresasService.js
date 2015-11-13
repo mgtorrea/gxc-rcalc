@@ -9,7 +9,7 @@ app.factory('EmpresasService', function ($q, $timeout, $http) {
             if (empresas_json === null) {
                 $http({
                     method: 'GET',
-                    url: 'http://localhost:8080/index'
+                    url: 'https://frozen-plateau-1742.herokuapp.com/index'
                 }).then(function successCallback(response) {
                     empresas_json = response.data;
                     deferred.resolve(estableceBadges(empresas_json));
