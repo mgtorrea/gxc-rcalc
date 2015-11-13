@@ -148,13 +148,13 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
 
     $scope.evaluaTestConfianza = function () {
         var num_no = 0;
-        if ($scope.testConfianza.transparencia)
+        if (!$scope.testConfianza.transparencia)
             num_no++;
-        if ($scope.testConfianza.confianza)
+        if (!$scope.testConfianza.confianza)
             num_no++;
-        if ($scope.testConfianza.control)
+        if (!$scope.testConfianza.control)
             num_no++;
-        if ($scope.testConfianza.valoracion)
+        if (!$scope.testConfianza.valoracion)
             num_no++;
         $scope.EP = num_no + 1;
         $scope.testConfianza.rating = $scope.EP;
