@@ -70,3 +70,9 @@ Now you can start crawling data by starting the configured agents. Note that con
 $ sh start-agent.sh
 ````
 
+Mobile app
+======
+
+To build the mobile app you must use cordova. To install cordova you must follow the instructions shown in https://cordova.apache.org/#getstarted.  Follow https://cordova.apache.org/docs/en/latest/guide/platforms/ to setup the required environment to develop, build and test the application on a device.
+
+Use **cordova run android** command to deploy to a connected device. You must be located on **webapp/** directory.
