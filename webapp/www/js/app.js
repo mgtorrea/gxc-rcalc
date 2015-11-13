@@ -51,7 +51,7 @@ setTimeout(function () {
 }, 1000);
 
 
-app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionicModal, $http, EmpresasService, $ionicLoading, $ionicPopup) {
+app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionicModal, $http, EmpresasService, $ionicLoading, $ionicPopup, $http) {
 
     var alertPopup = $ionicPopup.alert({
         title: 'Consejo',
@@ -98,7 +98,7 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
 
     $scope.configuraEmpresa = function () {
         $ionicLoading.show({
-            template: 'Cargando empresas...'
+            template: '<ion-spinner icon="spiral" class="spinner-light"></ion-spinner><br/>Cargando empresas...'
         });
         EmpresasService.getEmpresas().then(function (res) {
             $scope.empresas = res;
@@ -157,36 +157,66 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
         if ($scope.testConfianza.valoracion)
             num_no++;
         $scope.EP = num_no + 1;
+        $scope.testConfianza.rating = $scope.EP;
         $scope.data.empresaSeleccionada = {
             "companyName": "Personalizada",
             "riskIndex": $scope.EP
         };
-        var pop=$ionicPopup.show({
+        var pop = $ionicPopup.show({
             templateUrl: 'popup-reporte.html',
             title: 'Su opinión sobre la empresa es importante y nos serviría para evaluarla. ¿Desea compartir el resultado de su test y reportar la empresa?',
             scope: $scope,
             buttons: [
                 {
                     text: 'No enviar',
-                    onTap: function(e) {
+                    onTap: function (e) {
                         return false;
                     }
                 },
                 {
                     text: '<b>Enviar</b>',
                     type: 'button-positive',
-                    onTap: function(e) {
+                    onTap: function (e) {
                         return true;
                     }
                 }
             ]
         }).then(function (res) {
-            if(res){
-                $scope.data.empresaSeleccionada.companyName=$scope.testConfianza.nombreEmpresa;
+            if (res) {
+                $scope.data.empresaSeleccionada.companyName = $scope.testConfianza.nombreEmpresa;
+                $scope.reportaEmpresa();
             }
             $scope.closeModal();
             $scope.blurredClass = "";
             $scope.actualizaCalculo();
+        });
+    }
+
+    $scope.reportaEmpresa = function () {
+        $scope.testConfianza;
+        $ionicLoading.show({
+            template: '<ion-spinner icon="spiral" class="spinner-light"></ion-spinner><br/>Enviando reporte...'
+        });
+        $http({
+            method: 'PUT',
+            url: 'https://frozen-plateau-1742.herokuapp.com/admin/complains',
+            data: {
+                complain: {
+                    companyName: $scope.testConfianza.nombreEmpresa,
+                    rating: $scope.testConfianza.rating,
+                    comments: $scope.testConfianza.comentarios
+                }
+            }
+        }).then(function successCallback(response) {
+            $ionicLoading.hide();
+            $ionicPopup.alert({
+                title: 'Gracias',
+                template: 'Gracias por el reporte. Nos será de mucha utilidad para calcular el índice de confianza de la empresa.'
+            });
+            console.log("done");
+        }, function errorCallback(response) {
+            $ionicLoading.hide();
+            console.log("err", response);
         });
     }
 
