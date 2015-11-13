@@ -1,7 +1,8 @@
 Risk Calculator INAI contest
 ===
 
-This repository contains all components of the "Risk Calculator" project for INAI contest 
+This repository contains all components of the "Risk Calculator" project for INAI contest.
+Check the app functionality [on video](https://www.youtube.com/watch?v=MBlYHWENgHA&feature=youtu.be)
 
 
 Modules

@@ -3,11 +3,11 @@ backlog
 
 * 	improve risk formula
 * 	update risk index after calculation via admin endpoint 
+* 	implement risk index calculation using complains and crawlers' data
 
 
 in progress
 ====
-* 	implement risk index calculation using complains and crawlers' data
 
 
 done
@@ -18,4 +18,4 @@ done
 *		add risk index
 *	complains front-end interface
 * 	complete apestan.com crawler and refactor ir as flume sources
-* 	enable heroku deployment for rest module	(done)
+* 	enable heroku deployment for rest module
