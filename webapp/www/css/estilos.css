@@ -15,11 +15,14 @@ body * {
     background-position: 50%;
 }
 .gxc-header,
-.bar-footer {
+.bar-footer, .popup-head {
     background-color: #3E8059;
     color: white;
     border: 0;
     background-size: 0;
+}
+.popup-head *{
+    color:white;
 }
 .gxc-search {
     background-color: #3E8059;

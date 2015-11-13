@@ -29,7 +29,7 @@
                     <button class="button button-icon ion-navicon btn-menu" menu-toggle="left" style="top: 4px;"> </button>
                     <div class="calc-res-costo">
                         <span class="content" style="margin-left: 15px;"></span>
-                        <div class="label">Costo calculado</div>
+                        <div class="label">&iquest;Cu&aacute;nto vale tu informaci&oacute;n?</div>
                     </div>
                     <button class="button button-icon ion-ios-information-outline btn-menu" style="float: right; right: 0;top: 6px;font-size: 25pt;" ng-if="resultado>0" ng-click="muestraDetalleCalculo()"> </button>
                     <div class="calc-nombre-empresa" ng-click="configuraEmpresa();">
@@ -151,8 +151,7 @@
             <div class="card">
                 <div class="item item-text-wrap">
                     <h3>Reprueba estudio protección de datos de gigantes de Internet</h3>
-                    <p>
-                        La Jornada en linea 03/11/2015
+                    <p><span class="icon ion-document-text" style="float: left;display: inline-block;font-size: 30pt;"></span> La Jornada en linea 03/11/2015
                         <br/> Las principales empresas de telecomunicaciones y de internet no hacen lo suficiente para proteger la privacidad, los datos y la libertad de ... <a href="">Leer m&aacute;s</a></p>
                 </div>
             </div>
@@ -160,7 +159,7 @@
                 <div class="item item-text-wrap">
                     <h3>México prioriza privacidad y seguridad en el ámbito tecnológico</h3>
                     <p>
-                        CIOAL 09/11/2015
+                        <span class="icon ion-document-text" style="float: left;display: inline-block;font-size: 30pt;"></span> CIOAL 09/11/2015
                         <br/> En México, la privacidad y datos de las personas empresariales y ... y por la Ley Federal de Protección de Datos Personales en Posesión de ... <a href="">Leer m&aacute;s</a></p>
                 </div>
             </div>
@@ -168,7 +167,7 @@
                 <div class="item item-text-wrap">
                     <h3>Tweet de @INAIMexico</h3>
                     <p>
-                        Nov 10
+                        <span class="icon ion-social-twitter" style="float: left;display: inline-block;font-size: 30pt;"></span> Nov 10
                         <br/> ¿Tus hijos navegan en internet? Enséñalos a cuidarse. Participen en el Concurso de Dibujo: <a href="">http://bit.ly/1PHDkwt</a> </p>
                 </div>
             </div>
@@ -203,7 +202,6 @@
     <ion-modal-view>
         <ion-header-bar class="gxc-header">
             <h1 class="title">Test de confianza</h1>
-            <button class="button button-clear icon ion-close-round" ng-click="closeModal();"></button>
         </ion-header-bar>
         <ion-content style="top: 45px;">
             <div class="list list-inset">
@@ -292,19 +290,31 @@
                     La f&oacute;rmula utilizada para el c&aacute;lculo, es la siguiente:
                     <div id="formula" style="width:100%;height:80px;"></div>
                     Para el caso calculado, se tienen los siguientes valores:
-                    <br/> E=1
-                    <br/> S=2
-                    <br/> P=3
-                    <br/> a={{conteos.num_std}}
-                    <br/> b={{conteos.num_stv}}
-                    <br/> c={{conteos.num_spc}}
-                    <br/> EP={{EP}}
-                    <br/> UM={{UM}}
+                    <br/> Peso de informaci&oacute;n est&aacute;ndar (E)=1
+                    <br/> Peso de informaci&oacute;n sensible (S)=2
+                    <br/> Peso de informaci&oacute;n especial (P)=3
+                    <br/> N&uacute;m. datos est&aacute;ndar (a)={{conteos.num_std}}
+                    <br/> N&uacute;m. datos sensibles (b)={{conteos.num_stv}}
+                    <br/> N&uacute;m. datos estpeciales (c)={{conteos.num_spc}}
+                    <br/> Valor de principaios del usuario (EP)={{EP}}
+                    <br/> Unidad monetaria (UM)={{UM}}
                     <br/>
                 </div>
             </div>
         </ion-content>
     </ion-modal-view>
+</script>
+<script id="popup-reporte.html" type="text/ng-template">
+    <div class="list">
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">Empresa</span>
+            <input type="text" ng-model="testConfianza.nombreEmpresa" />
+        </label>
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">Comentarios</span>
+            <textarea ng-model="testConfianza.comentarios"></textarea>
+        </label>
+    </div>
 </script>
 
 </html>

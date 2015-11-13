@@ -51,10 +51,10 @@ setTimeout(function () {
 }, 1000);
 
 
-app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionicModal, $http, EmpresasService) {
+app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionicModal, $http, EmpresasService, $ionicLoading, $ionicPopup) {
 
     var alertPopup = $ionicPopup.alert({
-        title: 'Aviso',
+        title: 'Consejo',
         template: mensajes[Math.floor(Math.random() * mensajes.length)]
     }).then(function () {})
 
@@ -97,19 +97,25 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
     }
 
     $scope.configuraEmpresa = function () {
-        $ionicModal.fromTemplateUrl('modal-empresa.html', {
-            scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function (modal) {
-            $scope.filtro.nombre = "";
-            $scope.busca();
-            $scope.modal = modal;
-            $scope.modal.show();
+        $ionicLoading.show({
+            template: 'Cargando empresas...'
         });
-        $scope.closeModal = function () {
-            $scope.modal.hide();
-            $scope.modal.remove();
-        };
+        EmpresasService.getEmpresas().then(function (res) {
+            $scope.empresas = res;
+            $ionicModal.fromTemplateUrl('modal-empresa.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.filtro.nombre = "";
+                $ionicLoading.hide();
+                $scope.modal = modal;
+                $scope.modal.show();
+            });
+            $scope.closeModal = function () {
+                $scope.modal.hide();
+                $scope.modal.remove();
+            };
+        });
     }
 
     $scope.muestraTestConfianza = function () {
@@ -141,7 +147,6 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
     };
 
     $scope.evaluaTestConfianza = function () {
-        console.log($scope.testConfianza);
         var num_no = 0;
         if ($scope.testConfianza.transparencia)
             num_no++;
@@ -151,14 +156,38 @@ app.controller('RiskCalculatorController', function ($scope, $ionicPopup, $ionic
             num_no++;
         if ($scope.testConfianza.valoracion)
             num_no++;
-        $scope.EP = num_no+1;
+        $scope.EP = num_no + 1;
         $scope.data.empresaSeleccionada = {
             "companyName": "Personalizada",
-            "riskIndex":$scope.EP
+            "riskIndex": $scope.EP
         };
-        $scope.closeModal();
-        $scope.blurredClass = "";
-        $scope.actualizaCalculo();
+        var pop=$ionicPopup.show({
+            templateUrl: 'popup-reporte.html',
+            title: 'Su opinión sobre la empresa es importante y nos serviría para evaluarla. ¿Desea compartir el resultado de su test y reportar la empresa?',
+            scope: $scope,
+            buttons: [
+                {
+                    text: 'No enviar',
+                    onTap: function(e) {
+                        return false;
+                    }
+                },
+                {
+                    text: '<b>Enviar</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                        return true;
+                    }
+                }
+            ]
+        }).then(function (res) {
+            if(res){
+                $scope.data.empresaSeleccionada.companyName=$scope.testConfianza.nombreEmpresa;
+            }
+            $scope.closeModal();
+            $scope.blurredClass = "";
+            $scope.actualizaCalculo();
+        });
     }
 
     $scope.muestraDetalleCalculo = function () {
